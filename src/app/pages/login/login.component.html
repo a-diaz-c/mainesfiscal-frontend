@@ -1,1 +1,79 @@
-<p>login works!</p>
+<!--CONTENIDO-->
+<form (ngSubmit)="mostrar()" #f="ngForm">
+<div class="modal-dialog" role="document">
+    <div class="modal-content" style="border: hidden;">
+
+      <!--PESTAÑAS-->
+      <ul class="nav nav-tabs" id="myTab" role="tablist" style="font-family: Bahnschrift Light;">
+        <li class="nav-item">
+          <a class="nav-link active" id="iniciar-tab" data-toggle="tab" href="#iniciar" role="tab" aria-controls="iniciar" aria-selected="true">Iniciar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="empresas-tab" data-toggle="tab" href="#empresas" role="tab" aria-controls="empresas" aria-selected="false">URL Empresas</a>
+        </li>
+      </ul>
+      <!---->
+
+      <!--CABECERA MODAL-->
+      <div class="modal-header" style="background-color: #C3E5E7; font-family: Bahnschrift;">
+        <h5 class="modal-title mx-auto">Maines ERP + Business Intelligence + eCommerce</h5>
+      </div>
+      <!---->
+
+      <!--CUERPO MODAL-->
+      <div class="modal-body">
+
+        <!--CONTENIDO TAB-->
+        <div class="tab-content" id="myTabContent">
+
+          <!--INICIAR-->
+          <div class="tab-pane fade show active" id="iniciar" role="tabpanel" aria-labelledby="home-tab" style="font-family: Bahnschrift Light;">
+            <span *ngIf="f.submitted && !f.controls['usuario'].valid" class="text-danger">
+              El usuario no es valido
+              </span>
+            <input type="text" name="usuario" class="form-control" autocomplete="off" placeholder="Usuario" #usuario="ngModel" [(ngModel)]="usuario.usuario" required>
+            <br>
+            <input type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="usuario.password" required>
+            <br>
+            <input type="password" name="cliente" class="form-control" placeholder="Cliente Cloud" [(ngModel)]="usuario.clienteCloud" required>
+            <br>
+            <p align="center">Sociedad / Empresa</p>
+            <div class="modal-footer" style="font-family: Bahnschrift Light; font-size: 3px;">
+              <button type="submit" class="btn btn-info">INICIAR</button>
+            </div>
+          </div>
+          <!---->
+
+
+          <div class="tab-pane fade" id="empresas" role="tabpanel" aria-labelledby="empresas-tab">
+            <table class="table table-hover" style="font-family: Bahnschrift Light;">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">EMPRESA</th>
+                  <th scope="col">URL</th>
+                  <th scope="col">PUERTO</th>
+                  <th scope="col">INDEX</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Kingo Systems</th>
+                  <td>www.kingo.com.mx</td>
+                  <td>8080</td>
+                  <td>@mdo</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="modal-footer" style="font-family: Bahnschrift Light; font-size: 3px;">
+              <button type="button" class="btn btn-info">ENTRAR</button>
+              <button type="button" class="btn btn-info">REFRESH</button>
+              <button type="button" class="btn btn-light">A - Z</button>
+            </div>
+          </div>
+          </div> 
+        </div>
+        <!--||-->
+    </div>
+    <!--||--> 
+  </div>
+</form>

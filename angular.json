@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/bootstrap/css/bootstrap.css",
               "src/styles.css"
             ],
             "scripts": []
