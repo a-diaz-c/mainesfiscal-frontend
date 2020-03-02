@@ -12,7 +12,7 @@ export class AuthService {
   private url = 'http://localhost:3800/api/';
   userToken: String;
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient ) { this.userToken = "" }
 
   listalocalizados(rfc: string){
     return this.http.get(this.url + "buscar/listalocalizados/" + rfc);
@@ -35,6 +35,10 @@ export class AuthService {
   guardarToken(idToken){
     this.userToken = idToken;
     localStorage.setItem('token', idToken); 
+
+    let fecha = new Date();
+    fecha.setSeconds(60);
+    localStorage.setItem('expira', fecha.getTime().toString());
   }
 
   leerToke(){
@@ -45,5 +49,21 @@ export class AuthService {
     }
 
     return this.userToken;
+  }
+
+  estaAutenticado(): boolean{
+    if(this.userToken.length < 2){
+      return false;
+    }
+
+    const expira = Number(localStorage.getItem('expira'));
+    const expitaDate = new Date();
+    expitaDate.setTime(expira);
+
+    if(expitaDate > new Date()){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

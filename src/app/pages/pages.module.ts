@@ -12,6 +12,7 @@ import { FormsModule } from "@angular/forms";
 import { PagesComponent } from './pages.component';
 import { ListaNegraComponent } from './lista-negra/lista-negra.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -20,7 +21,7 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     PagesComponent, 
     ListaNegraComponent, 
-    LoginComponent
+    LoginComponent, HomeComponent
   ],
   imports: [
     CommonModule,

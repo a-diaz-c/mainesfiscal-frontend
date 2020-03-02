@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   mostrar(){
     this.authService.guardarToken('abc123def');
-    this.router.navigateByUrl('/lista-negra');
+    this.router.navigateByUrl('/home');
     console.log(this.usuario);
 
   }
