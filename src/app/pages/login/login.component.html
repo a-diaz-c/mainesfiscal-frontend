@@ -1,79 +1,61 @@
 <!--CONTENIDO-->
-<form (ngSubmit)="mostrar()" #f="ngForm">
-<div class="modal-dialog" role="document">
-    <div class="modal-content" style="border: hidden;">
-
-      <!--PESTAÑAS-->
-      <ul class="nav nav-tabs" id="myTab" role="tablist" style="font-family: Bahnschrift Light;">
-        <li class="nav-item">
-          <a class="nav-link active" id="iniciar-tab" data-toggle="tab" href="#iniciar" role="tab" aria-controls="iniciar" aria-selected="true">Iniciar</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="empresas-tab" data-toggle="tab" href="#empresas" role="tab" aria-controls="empresas" aria-selected="false">URL Empresas</a>
-        </li>
-      </ul>
-      <!---->
-
-      <!--CABECERA MODAL-->
-      <div class="modal-header" style="background-color: #C3E5E7; font-family: Bahnschrift;">
-        <h5 class="modal-title mx-auto">Maines ERP + Business Intelligence + eCommerce</h5>
-      </div>
-      <!---->
-
-      <!--CUERPO MODAL-->
-      <div class="modal-body">
-
-        <!--CONTENIDO TAB-->
-        <div class="tab-content" id="myTabContent">
-
-          <!--INICIAR-->
-          <div class="tab-pane fade show active" id="iniciar" role="tabpanel" aria-labelledby="home-tab" style="font-family: Bahnschrift Light;">
-            <span *ngIf="f.submitted && !f.controls['usuario'].valid" class="text-danger">
-              El usuario no es valido
-              </span>
-            <input type="text" name="usuario" class="form-control" autocomplete="off" placeholder="Usuario" [(ngModel)]="usuario.usuario" required>
-            <br>
-            <input type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="usuario.password" required>
-            <br>
-            <input type="password" name="cliente" class="form-control" placeholder="Cliente Cloud" [(ngModel)]="usuario.clienteCloud" required>
-            <br>
-            <p align="center">Sociedad / Empresa</p>
-            <div class="modal-footer" style="font-family: Bahnschrift Light; font-size: 3px;">
-              <button type="submit" class="btn btn-info">INICIAR</button>
+  <div class="login-clean" style="background-color: #fff;font-size: 18px;padding-top: 15px;padding-bottom: 15px;">
+    <form method="post" style="max-width: 650px;width: 600px;" (ngSubmit)="mostrar()" #f="ngForm">
+        <h2 class="sr-only">Login Form</h2>
+        <div>
+            <ul class="nav nav-tabs">
+                <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1" style="font-size: 17px;">Entrar</a></li>
+                <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2" style="font-size: 17px;">URL Empresas</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" role="tabpanel" id="tab-1">
+                    <p class="text-center text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="height: 50px;background-color: #C3E5E7;font-family: Bahnschrift;">
+                      <br>Maines ERP + Business Intelligence + eCommerce<br><br>
+                    </p>
+                    <input class="bg-light border rounded form-control" type="text" name="usuario" placeholder="Usuario" style="margin-bottom: 15px;" autocomplete="off" [(ngModel)]="usuario.usuario" required>
+                    <input class="bg-light border rounded form-control" type="password" name="password" placeholder="Password" style="margin-bottom: 15px;" autocomplete="off" [(ngModel)]="usuario.password" required>
+                    <input class="bg-light border rounded form-control" type="password" name="cloud" placeholder="Cliente Cloud" autocomplete="off" [(ngModel)]="usuario.clienteCloud" required>
+                    <label class="text-center" style="width: 470px;margin-top: 15px;font-size: 15px;">Sociedad / Empresa</label>
+                    <button class="btn btn-primary btn-block bg-info" type="submit" style="margin-top: 15px;">ENTRAR</button>
+                </div>
+                <div class="tab-pane" role="tabpanel" id="tab-2">
+                    <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #C3E5E7;height: 50px;font-family: Bahnschrift;font-size: 18px;"><br>Maines ERP + Business Intelligence + eCommerce<br><br></p>
+                    <div class="table-responsive" style="font-size: 15px;">
+                        <table class="table">
+                            <thead class="bg-light border rounded">
+                                <tr>
+                                    <th>EMPRESA</th>
+                                    <th>URL</th>
+                                    <th>PUERTO</th>
+                                    <th>INDEX</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Kingo Systems</td>
+                                    <td>www.kingo.com.mx</td>
+                                    <td>8080</td>
+                                    <td>Cell 2</td>
+                                </tr>
+                                <tr>
+                                    <td>Cell 3</td>
+                                    <td>Cell 4</td>
+                                    <td>Cell 4</td>
+                                    <td>Cell 4</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="btn-group border rounded border-white d-lg-flex justify-content-lg-center align-items-lg-center" role="group" style="height: 40px;">
+                      <button class="btn btn-info border rounded" type="button" style="margin-right: 20px;margin-top: 0px;">ENTRAR</button>
+                      <button class="btn btn-info border rounded" type="button" style="margin-right: 20px;margin-top: 0px;">REFRESH</button>
+                      <button class="btn btn-light border rounded" type="button" style="margin-top: 0px;">A - Z</button>
+                    </div>
+                </div>
+                <div class="tab-pane" role="tabpanel" id="tab-3">
+                    <p>Content for tab 3.</p>
+                </div>
             </div>
-          </div>
-          <!---->
-
-
-          <div class="tab-pane fade" id="empresas" role="tabpanel" aria-labelledby="empresas-tab">
-            <table class="table table-hover" style="font-family: Bahnschrift Light;">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">EMPRESA</th>
-                  <th scope="col">URL</th>
-                  <th scope="col">PUERTO</th>
-                  <th scope="col">INDEX</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Kingo Systems</th>
-                  <td>www.kingo.com.mx</td>
-                  <td>8080</td>
-                  <td>@mdo</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="modal-footer" style="font-family: Bahnschrift Light; font-size: 3px;">
-              <button type="button" class="btn btn-info">ENTRAR</button>
-              <button type="button" class="btn btn-info">REFRESH</button>
-              <button type="button" class="btn btn-light">A - Z</button>
-            </div>
-          </div>
-          </div> 
         </div>
-        <!--||-->
-    </div>
-    <!--||--> 
-  </div>
-</form>
+    </form>
+</div>
