@@ -1,10 +1,17 @@
-<table width="100%">
-    <!-- header -->
-    <app-header></app-header>
-    <!-- pages -->
-
-    <router-outlet></router-outlet>
-</table>
+ <!-- header -->
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4" style="background-color: aqua;">
+            <app-slider></app-slider>
+        </div>
+        <div class="col-8" >
+            <!-- pages -->
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    
+</div>
 <app-footer></app-footer>
 
 
