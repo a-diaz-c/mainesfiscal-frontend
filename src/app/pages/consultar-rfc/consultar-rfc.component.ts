@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Form } from '@angular/forms';
 
 @Component({
   selector: 'app-consultar-rfc',
@@ -27,13 +28,12 @@ export class ConsultarRfcComponent implements OnInit {
     this.buscarListalocalizados("FEVT880612SRA");
   }
 
-  buscar(){
-    console.log(this.buscar_rfc);
-    console.log(this.lista69);
-    console.log(this.listaIncumplidos);
-
-    this.buscarLista69(this.buscar_rfc);
-    this.buscarListalocalizados(this.buscar_rfc);
+  buscar(f){
+    console.log(f);
+    if(this.lista69)
+      this.buscarLista69(this.buscar_rfc);
+    if(this.buscarListalocalizados)
+      this.buscarListalocalizados(this.buscar_rfc);
   }
 
   buscarLista69(rfc: string){
