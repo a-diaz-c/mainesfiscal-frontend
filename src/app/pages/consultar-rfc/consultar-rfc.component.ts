@@ -29,7 +29,6 @@ export class ConsultarRfcComponent implements OnInit {
   }
 
   buscar(f){
-    console.log(f);
     if(this.lista69)
       this.buscarLista69(this.buscar_rfc);
     if(this.buscarListalocalizados)

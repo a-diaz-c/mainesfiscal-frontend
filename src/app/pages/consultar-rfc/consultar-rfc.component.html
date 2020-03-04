@@ -5,14 +5,11 @@
         <h2 class="sr-only">Login Form</h2>
         <div class="illustration"></div>
         <div class="form-group">
-            <div class="alert alert-danger" role="alert" *ngIf="!lista69 && !listaIncumplidos && rfc.touched">
+            <div class="alert alert-danger" role="alert" *ngIf="!lista69 && !listaIncumplidos && !f.pristine">
                 Seleccione una lista
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="rfc.touched && !rfc.valid">
-                RFC invalido
-            </div>  
             <input class="border rounded form-control d-inline-block" type="text" style="font-family: Montserrat;font-size: 14px;width: 600px;filter: blur(0px) brightness(100%) contrast(100%) saturate(100%);" autocomplete="off" name="rfc" #rfc="ngModel" placeholder="RFC a Consultar" [(ngModel)]="buscar_rfc" required minlength="12" maxlength="13">
-            <button class="btn btn-primary btn-block bg-info d-inline-block" type="submit" style="font-family: Montserrat;font-size: 14px;width: 150px;margin: 0px;margin-left: 150px;" [disabled]="(!lista69 && !listaIncumplidos) || !rfc.valid">Consultar</button>
+            <button class="btn btn-primary btn-block bg-info d-inline-block" type="submit" style="font-family: Montserrat;font-size: 14px;width: 150px;margin: 0px;margin-left: 150px;" [disabled]="(!lista69 && !listaIncumplidos) ">Consultar</button>
             <div class="illustration">
             </div>
                 <div class="table-responsive border rounded" style="font-family: Montserrat;color: 13px;">
