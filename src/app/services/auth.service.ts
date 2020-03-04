@@ -33,6 +33,7 @@ export class AuthService {
 
     const headerOptions  = {
       headers: new HttpHeaders({
+        'Access-Control-Allow-Origin':'*',
         'Content-Type':  'application/json',
         'Authorization': 'Basic ' + btoa(usuario.usuario + ':' + usuario.password)
       })
