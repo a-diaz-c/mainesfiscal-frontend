@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsuarioModel } from '../models/usuario.models';
 
 import { map } from 'rxjs/operators';
@@ -30,6 +30,14 @@ export class AuthService {
                    return resp;
                  })
                );*/
+
+    const headerOptions  = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Basic ' + btoa(usuario.usuario + ':' + usuario.password)
+      })
+    };
+    return this.http.get("http://ec2-3-84-197-209.compute-1.amazonaws.com:8080/mainesWeb/recursos/usuarios/login", headerOptions);
   }
 
   guardarToken(idToken){

@@ -22,7 +22,7 @@
 </nav>
 <!--CONTENIDO-->
   <div class="login-clean" style="background-color: #fff;font-size: 18px;padding-top: 15px;padding-bottom: 15px;">
-    <form method="post" style="max-width: 650px;width: 600px;" (ngSubmit)="mostrar()" #f="ngForm">
+    <form style="max-width: 650px;width: 600px;" (ngSubmit)="onSubmit()" #f="ngForm">
         <h2 class="sr-only">Login Form</h2>
         <div>
             <ul class="nav nav-tabs">
@@ -34,6 +34,9 @@
                     <p class="text-center text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="height: 50px;background-color: #C3E5E7;font-family: Bahnschrift;">
                       <br>Maines ERP + Business Intelligence + eCommerce<br><br>
                     </p>
+                    <div class="alert alert-danger" role="alert" *ngIf="encontrado === false && f.submitted">
+                        {{titulo}}
+                    </div>
                     <input class="bg-light border rounded form-control" type="text" name="usuario" placeholder="Usuario" style="margin-bottom: 15px;" autocomplete="off" [(ngModel)]="usuario.usuario" required>
                     <input class="bg-light border rounded form-control" type="password" name="password" placeholder="Password" style="margin-bottom: 15px;" autocomplete="off" [(ngModel)]="usuario.password" required>
                     <input class="bg-light border rounded form-control" type="password" name="cloud" placeholder="Cliente Cloud" autocomplete="off" [(ngModel)]="usuario.clienteCloud" required>
