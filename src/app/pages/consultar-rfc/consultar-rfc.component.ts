@@ -29,10 +29,17 @@ export class ConsultarRfcComponent implements OnInit {
   }
 
   buscar(f){
-    if(this.lista69)
+    console.log(this.lista69);
+    console.log(this.listaIncumplidos);
+    if(f.invalid && !this.buscarLista69 && this.buscarListalocalizados){
+      return;
+    }
+    if(this.lista69){
       this.buscarLista69(this.buscar_rfc);
-    if(this.buscarListalocalizados)
+    }
+    if(this.listaIncumplidos){
       this.buscarListalocalizados(this.buscar_rfc);
+    }
   }
 
   buscarLista69(rfc: string){
