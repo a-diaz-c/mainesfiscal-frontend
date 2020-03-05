@@ -14,8 +14,12 @@ export class ConsultarRfcComponent implements OnInit {
   resultadoListalocalizados;
 
   buscar_rfc: string;
+  
   lista69: boolean;
   listaIncumplidos: boolean;
+
+  encotradoLista69: boolean;
+  encontradoIncumplidos: boolean; 
 
   constructor(private authService: AuthService) { 
     this.buscar_rfc = "";
@@ -29,39 +33,50 @@ export class ConsultarRfcComponent implements OnInit {
   }
 
   buscar(f){
-    console.log(this.lista69);
-    console.log(this.listaIncumplidos);
-    console.log(f);
-    if(f.invalid && !this.buscarLista69 && this.buscarListalocalizados){
+    if(f.invalid && !this.lista69 && !this.listaIncumplidos){
       return;
     }
+    
+    this.encontradoIncumplidos = null;
+    this.encotradoLista69 = null;
+
     if(this.lista69){
       this.buscarLista69(this.buscar_rfc);
+      if(Object.keys(this.resultadoLista69).length > 1){
+        this.encotradoLista69 = true;
+      }else{
+        this.encotradoLista69 = false;
+      }
     }
     if(this.listaIncumplidos){
       this.buscarListalocalizados(this.buscar_rfc);
+      if(Object.keys(this.resultadoListalocalizados).length > 1){
+        this.encontradoIncumplidos = true;
+      }else{
+        this.encontradoIncumplidos = false;
+      }
     }
   }
 
   buscarLista69(rfc: string){
     this.authService.lista69(rfc).subscribe(data => {
       this.resultadoLista69 = data;
+
       console.log(this.resultadoLista69);
     },
     (err: HttpErrorResponse) => {
       console.log("Error del servidor");
-
     });
   }
 
   buscarListalocalizados(rfc: string){
     this.authService.listalocalizados(rfc).subscribe(data => {
       this.resultadoListalocalizados = data;
+      
       console.log(this.resultadoListalocalizados);
     },
     (err: HttpErrorResponse) => {
       console.log("Error del servidor");
-
     });
   }
 

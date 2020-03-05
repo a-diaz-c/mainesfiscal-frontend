@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  oculto: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  mover(){
+    if(this.oculto)
+      this.oculto = false;
+    else
+      this.oculto = true;
   }
 
 }
