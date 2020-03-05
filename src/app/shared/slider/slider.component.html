@@ -1,43 +1,44 @@
-<div class="container" style="margin-top: 25px;">
-    <div>
-        <ul class="nav nav-tabs text-center">
-            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1" style="font-family: Montserrat;font-size: 14px;">Maines Fiscal</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" role="tabpanel" id="tab-1"><div style="font-family: Montserrat; font-size: 14px;">
-                <ul id="menu">
-                    <br>
-                    <li>
-        <input type="checkbox" name="list" id="nivel2-1">
-        <label for="nivel2-1">Maines Fiscal-SAT</label>
-        <ul class="interior">
-            <li><a href="#r">Consultar RFCs Ingresos/Egresos</a></li>
-            <li><a href="#r">Consultar por RFC</a></li>
-        </ul>
-    </li>
-    <li>
-        <input type="checkbox" name="list" id="nivel2-2">
-        <label for="nivel2-2">XML Emitidos y Recibidos</label>
-        <ul class="interior">
-            <li><a href="#r">Descargar XMLs - CFDIs desde el SATT</a></li>
-            <li><a href="#r">Análisis Fiscal/Impuestos de XMLs descargados</a></li>
-        </ul>
-    </li>
-    <li>
-        <input type="checkbox" name="list" id="nivel2-3">
-        <label for="nivel2-3">Validar CFDIs</label>
-        <ul class="interior">
-            <li>
-                <input type="checkbox" name="list" id="nivel3-1">
-                <label for="nivel3-1">Empresas</label>
-                <ul class="interior">
-                    <li><a href="#r">Crear</a></li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-</ul>
-        </div></div>
-        </div>
+<!-- Sidebar  -->
+<nav id="sidebar">
+    <div id="dismiss">
+        <i class="fas fa-arrow-left"></i>
     </div>
-</div>
+
+    <div class="sidebar-header">
+        <h4>MAINES FISCAL</h4>
+    </div>
+
+    <ul class="list-unstyled components" style="font-family: Montserrat;">
+        <li>
+            <a href="#1" data-toggle="collapse" aria-expanded="false">Maines Fiscal-SAT</a>
+            <ul class="collapse list-unstyled" id="1">
+                <li>
+                    <a href="#">Consultar RFCs Ingresos/Egresos</a>
+                </li>
+                <li>
+                    <a href="#">Consultar por RFC</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#2" data-toggle="collapse" aria-expanded="false">XML Emitidos y Recibidos</a>
+            <ul class="collapse list-unstyled" id="2">
+                <li>
+                    <a href="#">Descargar XMLs - CFDIs desde el SAT</a>
+                </li>
+                <li>
+                    <a href="#">Análisis Fiscal/Impuestos de XMLs descargados</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#3" data-toggle="collapse" aria-expanded="false">Validar CFDIs</a>
+            <ul class="collapse list-unstyled" id="3">
+                <li>
+                    <a href="#">Empresas</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<!---->

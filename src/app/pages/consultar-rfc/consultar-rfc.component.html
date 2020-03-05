@@ -1,126 +1,55 @@
-<div class="login-clean" style="background-color: #fff;padding-top: 40px;padding-bottom: 40px;">
-    
-    <form style="width: 1000px;max-width: 1000px;padding: 10px;" (ngSubmit)="buscar(rfc)" #f="ngForm">
-        
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group">
-            <!-- <div class="alert alert-danger" role="alert" *ngIf="!lista69 && !listaIncumplidos && !f.pristine">
-                Seleccione una lista
-            </div>-->
-            <h6 class="text-danger" *ngIf="!lista69 && !listaIncumplidos && rfc.touched">Seleccione un lista</h6>
-            <input class="border rounded form-control d-inline-block" 
-                   type="text" 
-                   style="font-family: Montserrat;font-size: 14px;width: 600px;filter: blur(0px) brightness(100%) contrast(100%) saturate(100%);" 
-                   autocomplete="off" 
-                   name="rfc" 
-                   #rfc="ngModel" 
-                   placeholder="RFC a Consultar" 
-                   [(ngModel)]="buscar_rfc" 
-                   required minlength="12" 
-                   maxlength="13">
-            
-            <button class="btn btn-primary btn-block bg-info d-inline-block" 
-                    type="submit" 
-                    style="font-family: Montserrat;font-size: 14px;width: 150px;margin: 0px;margin-left: 150px;" 
-                    >
-                    Consultar
-            </button>
-            <div class="illustration">
-            </div>
-                <div class="table-responsive border rounded" style="font-family: Montserrat;color: 13px;">
-                    <table class="table">
-                        <thead class="bg-light" style="font-family: Montserrat;font-size: 14px;">
-                            <tr>
-                                <th style="width: 600px;">Lista del SAT a Consultar</th>
-                                <th class="text-center" style="max-width: 180px;">Resultado</th>
-                                <th class="text-center" style="width: 180px;max-width: 180px;"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="font-family: Montserrat;font-size: 14px;">
-                                <td>
-                                    <div class="custom-control custom-switch">
-                                        <input class="custom-control-input" type="checkbox" id="formCheck-1" name="lista_69" [(ngModel)]="lista69">
-                                        <label class="custom-control-label" for="formCheck-1" >Lista SAT 69B: Facturas falsas EDOS/EFOS</label>
-                                    </div>
-                                </td>
-                                <td class="text-center"></td>
-                                <td></td>
-                            </tr>
-                            <tr style="font-family: Montserrat;font-size: 14px;">
-                                <td>
-                                    <div class="custom-control custom-switch">
-                                        <input class="custom-control-input" type="checkbox" id="formCheck-2" name="incumplidos" [(ngModel)]="listaIncumplidos">
-                                        <label class="custom-control-label" for="formCheck-2" >Lista SAT: Contribuyentes incumplidos: No localizados, adeudados, otros</label>
-                                    </div>
-                                </td>
-                                <td class="text-center"></td>
-                                <td></td>
-                            </tr>
-                            <tr style="font-family: Montserrat;font-size: 14px;">
-                                <td>
-                                    <div class="custom-control custom-switch">
-                                        <input class="custom-control-input" type="checkbox" id="formCheck-3" disabled="">
-                                        <label class="custom-control-label" for="formCheck-3">Lista SAT: Contribuyentes son sentencias / delitos fiscales</label>
-                                    </div>
-                                </td>
-                                <td class="text-center"></td>
-                                <td></td>
-                            </tr>
-                            <tr style="font-family: Montserrat;font-size: 14px;">
-                                <td>
-                                    <div class="custom-control custom-switch">
-                                        <input class="custom-control-input" type="checkbox" id="formCheck-4" disabled="">
-                                        <label class="custom-control-label" for="formCheck-4">Lista SAT: Otros</label>
-                                    </div>
-                                </td>
-                                <td class="text-center"></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <!--Formulario-->
+        <div class="login-clean" style="background-color: #fff;padding-top: 40px;padding-bottom: 40px;">
+            <form style="width: 1000px;max-width: 1000px;padding: 20px;height: none;font-family: Antic, sans-serif;">
+                
+                <div class="form-group">
+                    <input class="border rounded form-control d-inline-block" type="text" style="width: 600px;font-family: Antic, sans-serif;font-size: 14px;" name="rfc" placeholder="RFC  a Consultar">
+                    <button class="btn btn-primary btn-block bg-info d-inline-block" type="submit" style="font-family: Montserrat;font-size: 14px;width: 150px;margin: 0px;margin-left: 150px;">Consultar</button>
+                    
+                    <div class="illustration"></div>
+                    
+                    <div class="table-responsive" style="font-family: Montserrat;color: 13px;">
+                        <table class="table">
+                            <thead class="bg-light" style="font-family: Montserrat;font-size: 14px;">
+                                <tr>
+                                    <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Lista del SAT a Consultar</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr style="font-family: Montserrat;font-size: 14px;">
+                                    <td>
+                                        <div class="custom-control custom-switch">
+                                            <input class="custom-control-input" type="checkbox" id="formCheck-1">
+                                            <label class="custom-control-label" for="formCheck-1">Lista SAT 69B: Facturas falsas EDOS/EFOS</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="font-family: Montserrat;font-size: 14px;">
+                                    <td>
+                                        <div class="custom-control custom-switch">
+                                            <input class="custom-control-input" type="checkbox" id="formCheck-2">
+                                            <label class="custom-control-label" for="formCheck-2">Lista SAT: Contribuyentes incumplidos: No localizados, adeudados, otros</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="font-family: Montserrat;font-size: 14px;">
+                                    <td>
+                                        <div class="custom-control custom-switch">
+                                            <input class="custom-control-input" type="checkbox" id="formCheck-3" disabled="">
+                                            <label class="custom-control-label" for="formCheck-3">Lista SAT: Contribuyentes son sentencias / delitos fiscales</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="font-family: Montserrat;font-size: 14px;">
+                                    <td>
+                                        <div class="custom-control custom-switch">
+                                            <input class="custom-control-input" type="checkbox" id="formCheck-4" disabled="">
+                                            <label class="custom-control-label" for="formCheck-4">Lista SAT: Otros</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <ul class="list-group"></ul>
-            <div class="table-responsive">
-                <table class="table">
-                    <tbody>
-                        <tr class="text-dark">
-                        <td style="width: 500;font-family: Montserrat;font-size: 14px;">
-                            <select class="bg-light border rounded custom-select" style="margin-bottom: 10px;font-size: 14px;">
-                                <optgroup label="Origen de Datos (CFDIs)">
-                                    <option value="12">Maines ERP</option>
-                                    <option value="13">SAT Descargas</option>
-                                    <option value="14">Excel</option>
-                                    <option value="15">FTP Remoto</option>
-                                </optgroup></select>
-                            <div class="custom-control custom-switch">
-                                <input class="custom-control-input" type="checkbox" id="formCheck-5">
-                                <label class="custom-control-label" for="formCheck-5" style="margin-bottom: 10px;">CFDIs Ventas / Ingresos</label>
-                            </div>
-                            <div class="custom-control custom-switch">
-                                <input class="custom-control-input" type="checkbox" id="formCheck-6">
-                                <label class="custom-control-label" for="formCheck-6" style="margin-bottom: 10px;">CFDIs Compras</label>
-                            </div>
-                            <div class="custom-control custom-switch">
-                                <input class="custom-control-input" type="checkbox" id="formCheck-7">
-                                <label class="custom-control-label" for="formCheck-7">Polizas - Contabilidad</label>
-                            </div>
-                        </td>
-                        <td style="width: 500px;font-family: Montserrat;font-size: 14px;">
-                            <label class="text-left d-block" style="padding: 10px;background-color: #FFDA45;">
-                                <strong>Periodo de Revisión</strong>
-                            </label>
-                            <label class="text-left d-inline-block" style="padding: 10px;">De</label>
-                            <input class="bg-light border rounded form-control d-inline-block" type="date" style="font-size: 14px;width: 202.5px;">
-                            <label class="text-left d-inline-block" style="padding: 10px;">A</label>
-                            <input class="bg-light border rounded form-control d-inline-block" type="date" style="font-size: 14px;width: 202.5px;">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </form>
-</div>
-
