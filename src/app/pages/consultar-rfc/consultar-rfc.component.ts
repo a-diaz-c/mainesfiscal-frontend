@@ -31,6 +31,7 @@ export class ConsultarRfcComponent implements OnInit {
   buscar(f){
     console.log(this.lista69);
     console.log(this.listaIncumplidos);
+    console.log(f);
     if(f.invalid && !this.buscarLista69 && this.buscarListalocalizados){
       return;
     }

@@ -1,55 +1,106 @@
-        <!--Formulario-->
-        <div class="login-clean" style="background-color: #fff;padding-top: 40px;padding-bottom: 40px;">
-            <form style="width: 1000px;max-width: 1000px;padding: 20px;height: none;font-family: Antic, sans-serif;">
+<!--Formulario-->
+<div class="login-clean" style="background-color: #fff;padding-top: 40px;padding-bottom: 40px;">
+    <form style="width: 1000px;max-width: 1000px;padding: 20px;height: none;font-family: Antic, sans-serif;" (ngSubmit)="buscar(rfc)" #f="ngForm">
                 
-                <div class="form-group">
-                    <input class="border rounded form-control d-inline-block" type="text" style="width: 600px;font-family: Antic, sans-serif;font-size: 14px;" name="rfc" placeholder="RFC  a Consultar">
-                    <button class="btn btn-primary btn-block bg-info d-inline-block" type="submit" style="font-family: Montserrat;font-size: 14px;width: 150px;margin: 0px;margin-left: 150px;">Consultar</button>
+    <div class="form-group">
+        <h6 class="text-danger" *ngIf="!lista69 && !listaIncumplidos && rfc.touched">Seleccione un lista</h6>
+        <input class="border rounded form-control d-inline-block" 
+                type="text" 
+                style="width: 600px;font-family: Antic, sans-serif;font-size: 14px;" 
+                name="rfc" 
+                #rfc="ngModel" 
+                placeholder="RFC a Consultar" 
+                [(ngModel)]="buscar_rfc" 
+                required minlength="12" 
+                maxlength="13">
+        
+        <button class="btn btn-primary btn-block bg-info d-inline-block" 
+                type="submit" 
+                style="font-family: Montserrat;font-size: 14px;width: 150px;margin: 0px;margin-left: 150px;">
+                Consultar</button>
+        
+        <div class="illustration"></div>
                     
-                    <div class="illustration"></div>
-                    
-                    <div class="table-responsive" style="font-family: Montserrat;color: 13px;">
-                        <table class="table">
-                            <thead class="bg-light" style="font-family: Montserrat;font-size: 14px;">
-                                <tr>
-                                    <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Lista del SAT a Consultar</th>
-                                </tr>
-                            </thead>
-                            
-                            <tbody>
-                                <tr style="font-family: Montserrat;font-size: 14px;">
-                                    <td>
-                                        <div class="custom-control custom-switch">
-                                            <input class="custom-control-input" type="checkbox" id="formCheck-1">
-                                            <label class="custom-control-label" for="formCheck-1">Lista SAT 69B: Facturas falsas EDOS/EFOS</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr style="font-family: Montserrat;font-size: 14px;">
-                                    <td>
-                                        <div class="custom-control custom-switch">
-                                            <input class="custom-control-input" type="checkbox" id="formCheck-2">
-                                            <label class="custom-control-label" for="formCheck-2">Lista SAT: Contribuyentes incumplidos: No localizados, adeudados, otros</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr style="font-family: Montserrat;font-size: 14px;">
-                                    <td>
-                                        <div class="custom-control custom-switch">
-                                            <input class="custom-control-input" type="checkbox" id="formCheck-3" disabled="">
-                                            <label class="custom-control-label" for="formCheck-3">Lista SAT: Contribuyentes son sentencias / delitos fiscales</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr style="font-family: Montserrat;font-size: 14px;">
-                                    <td>
-                                        <div class="custom-control custom-switch">
-                                            <input class="custom-control-input" type="checkbox" id="formCheck-4" disabled="">
-                                            <label class="custom-control-label" for="formCheck-4">Lista SAT: Otros</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="table-responsive" style="font-family: Montserrat;color: 13px;">
+                <table class="table">
+                    <thead class="bg-light" style="font-family: Montserrat;font-size: 14px;">
+                        <tr>
+                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Lista del SAT a Consultar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="font-family: Montserrat;font-size: 14px;">
+                            <td>
+                                <div class="custom-control custom-switch">
+                                    <input class="custom-control-input" type="checkbox" id="formCheck-1" name="lista_69" [(ngModel)]="lista69">
+                                    <label class="custom-control-label" for="formCheck-1">Lista SAT 69B: Facturas falsas EDOS/EFOS</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="font-family: Montserrat;font-size: 14px;">
+                            <td>
+                                <div class="custom-control custom-switch">
+                                    <input class="custom-control-input" type="checkbox" id="formCheck-2" name="incumplidos" [(ngModel)]="listaIncumplidos">
+                                    <label class="custom-control-label" for="formCheck-2">Lista SAT: Contribuyentes incumplidos: No localizados, adeudados, otros</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="font-family: Montserrat;font-size: 14px;">
+                            <td>
+                                <div class="custom-control custom-switch">
+                                    <input class="custom-control-input" type="checkbox" id="formCheck-3" disabled="">
+                                    <label class="custom-control-label" for="formCheck-3">Lista SAT: Contribuyentes son sentencias / delitos fiscales</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="font-family: Montserrat;font-size: 14px;">
+                            <td>
+                                <div class="custom-control custom-switch">
+                                    <input class="custom-control-input" type="checkbox" id="formCheck-4" disabled="">
+                                    <label class="custom-control-label" for="formCheck-4">Lista SAT: Otros</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="container">
+            <label class="text-left d-block" style="padding: 10px;background-color: #FFDA45;">
+                <strong class="text-dark" style="font-family: Montserrat, sans-serif;font-size: 14px;">Resultados de Consulta&nbsp;</strong>
+            </label>
+            <div class="table-responsive" style="font-family: Montserrat;color: 13px;">
+                <table class="table">
+                    <thead class="bg-light" style="font-family: Montserrat;font-size: 14px;">
+                        <tr>
+                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Lista</th>
+                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">RFC</th>
+                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Empresa</th>
+                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Estatus</th>
+                            <th class="text-center border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="font-family: Montserrat;font-size: 14px;">
+                            <td>69B</td>
+                            <td>KSY010331243</td>
+                            <td>Kingo Systems</td>
+                            <td>No encontrado</td>
+                            <td class="text-center">04/03/2020</td>
+                        </tr>
+                        <tr style="font-family: Montserrat;font-size: 14px;">
+                            <td>Incumplidos</td>
+                            <td>KSY010331243</td>
+                            <td>Kingo Systems</td>
+                            <td>No encontrado</td>
+                            <td class="text-center">04/03/2020</td>
+                        </tr>
+                        <tr style="font-family: Montserrat;font-size: 14px;"></tr>
+                        <tr style="font-family: Montserrat;font-size: 14px;"></tr>
+                        <tr style="font-family: Montserrat;font-size: 14px;"></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
