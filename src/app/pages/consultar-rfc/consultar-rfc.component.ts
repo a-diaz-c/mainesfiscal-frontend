@@ -28,12 +28,12 @@ export class ConsultarRfcComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.buscarLista69("AAA080808HL8");
-    this.buscarListalocalizados("FEVT880612SRA");
+    //this.buscarLista69("AAA080808HL8");
+    //this.buscarListalocalizados("FEVT880612SRA");
   }
 
   buscar(f){
-    if(f.invalid && !this.lista69 && !this.listaIncumplidos){
+    if((f.invalid && !this.lista69 && !this.listaIncumplidos) || f.invalid){
       return;
     }
     
@@ -41,26 +41,27 @@ export class ConsultarRfcComponent implements OnInit {
     this.encotradoLista69 = null;
 
     if(this.lista69){
-      this.buscarLista69(this.buscar_rfc);
-      if(Object.keys(this.resultadoLista69).length > 1){
-        this.encotradoLista69 = true;
-      }else{
-        this.encotradoLista69 = false;
-      }
+      
+      this.buscarLista69(this.buscar_rfc);   
+ 
     }
     if(this.listaIncumplidos){
+      
       this.buscarListalocalizados(this.buscar_rfc);
-      if(Object.keys(this.resultadoListalocalizados).length > 1){
-        this.encontradoIncumplidos = true;
-      }else{
-        this.encontradoIncumplidos = false;
-      }
+      
     }
   }
 
   buscarLista69(rfc: string){
     this.authService.lista69(rfc).subscribe(data => {
       this.resultadoLista69 = data;
+
+      if(Object.keys(this.resultadoLista69).length > 1){
+        console.log("lista 69");
+        this.encotradoLista69 = true;
+      }else{
+        this.encotradoLista69 = false;
+      }
 
       console.log(this.resultadoLista69);
     },
@@ -72,12 +73,22 @@ export class ConsultarRfcComponent implements OnInit {
   buscarListalocalizados(rfc: string){
     this.authService.listalocalizados(rfc).subscribe(data => {
       this.resultadoListalocalizados = data;
-      
+
+      if(Object.keys(this.resultadoListalocalizados).length > 1){
+        console.log("Lista incumplidos");
+        this.encontradoIncumplidos = true;
+      }else{
+        this.encontradoIncumplidos = false;
+        
+      }
+    
       console.log(this.resultadoListalocalizados);
     },
     (err: HttpErrorResponse) => {
       console.log("Error del servidor");
     });
   }
+
+
 
 }
