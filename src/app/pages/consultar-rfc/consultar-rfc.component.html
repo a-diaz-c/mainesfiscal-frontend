@@ -70,48 +70,30 @@
                 <strong class="text-dark" style="font-family: Montserrat, sans-serif;font-size: 14px;">Resultados de Consulta&nbsp;</strong>
             </label>
             <div class="table-responsive" style="font-family: Montserrat;color: 13px;">
-                <h6 *ngIf="encotradoLista69 == false && lista69">No se encontro en Facturas Falsas EDOS/EFOS</h6>
-                <table class="table" *ngIf="encotradoLista69">
+                <table class="table" >
                     <thead class="bg-light" style="font-family: Montserrat;font-size: 14px;">
                         <tr>
                             <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Lista</th>
                             <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">RFC</th>
-                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Empresa</th>
-                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Estatus</th>
-                            <th class="text-center border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Fecha</th>
+                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Busqueda</th>
+                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Estatus en la lista SAT</th>
+                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Nombre/Razon Social</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr style="font-family: Montserrat;font-size: 14px;">
-                            <td>Facturas Falsas EDOS/EFOS</td>
-                            <td>{{resultadoLista69.RFC}}</td>
-                            <td>{{resultadoLista69.NombreDelContribuyente}}</td>
+                            <td>Lista SAT 69B: Facturas falsas EDOS/EFOS</td>
+                            <td>{{retultadoRFC}}</td>
+                            <td>{{estadoLista69}}</td>                            
                             <td>{{resultadoLista69.SituacionDelContribuyente}}</td>
-                            <td>{{resultadoLista69.NumeroyFechaDeOficioGlobalDePresuncion}}</td>
+                            <td>{{resultadoLista69.NombreDelContribuyente}}</td>
                         </tr>
-                        <tr style="font-family: Montserrat;font-size: 14px;"></tr>
-                        <tr style="font-family: Montserrat;font-size: 14px;"></tr>
-                        <tr style="font-family: Montserrat;font-size: 14px;"></tr>
-                    </tbody>
-                </table>
-                <h6 *ngIf="encontradoIncumplidos == false  && listaIncumplidos">No se encotro en Contribuyentes Incumplidos</h6>
-                <table class="table" *ngIf="encontradoIncumplidos">
-                    <thead class="bg-light" style="font-family: Montserrat;font-size: 14px;">
-                        <tr>
-                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Lista</th>
-                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">RFC</th>
-                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Razon Social</th>
-                            <th class="border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Supuesto</th>
-                            <th class="text-center border rounded border-white" style="width: 600px;background-color: #DFF4F0;">Entidad Federativa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
                         <tr style="font-family: Montserrat;font-size: 14px;">
-                            <td>Contribuyentes Incumplidos</td>
-                            <td>{{resultadoListalocalizados.RFC}}</td>
-                            <td>{{resultadoListalocalizados.RazonSocial}}</td>
+                            <td>Lista SAT: No localizados</td>
+                            <td>{{retultadoRFC}}</td>
+                            <td>{{estadoIncumplidos}}</td>                            
                             <td>{{resultadoListalocalizados.Supuesto}}</td>
-                            <td>{{resultadoListalocalizados.EntidadFederativa}}</td>
+                            <td>{{resultadoListalocalizados.RazonSocial}}</td>
                         </tr>
                         <tr style="font-family: Montserrat;font-size: 14px;"></tr>
                         <tr style="font-family: Montserrat;font-size: 14px;"></tr>
