@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagesComponent implements OnInit {
 
+  sliderDesplegado: boolean = true;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  toggleSlider(){
+
+    if(this.sliderDesplegado === true){
+      this.sliderDesplegado = false;
+
+    }else{
+      this.sliderDesplegado = true;
+
+    }
+
+
+
   }
 
 }
