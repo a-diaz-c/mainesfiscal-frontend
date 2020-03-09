@@ -38,7 +38,7 @@ export class AuthService {
         'Authorization': 'Basic ' + btoa(usuario.usuario + ':' + usuario.password)
       })
     };
-    return this.http.get("http://ec2-3-84-197-209.compute-1.amazonaws.com:8080/mainesWeb/recursos/usuarios/login", headerOptions);
+    return this.http.get("http://maines-rest.ddns.net:8080/mainesWeb/recursos/usuarios/login", headerOptions);
   }
 
   guardarToken(idToken){
