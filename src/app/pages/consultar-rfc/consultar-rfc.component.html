@@ -19,9 +19,11 @@
                 style="font-family: Montserrat;font-size: 14px;width: 150px;margin: 0px;margin-left: 150px;">
                 Consultar</button>
         
-        <div class="illustration"></div>
-                    
+        <div class="illustration"></div>      
             <div class="table-responsive" style="font-family: Montserrat;color: 13px;">
+                <div class="alert alert-danger" role="alert" *ngIf="errorConexion">
+                    Error de conexion
+                </div>  
                 <table class="table">
                     <thead class="bg-light" style="font-family: Montserrat;font-size: 14px;">
                         <tr>

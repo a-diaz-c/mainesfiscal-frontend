@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   usuario: UsuarioModel;
   respuesta;
   encontrado: boolean;
+
   titulo: String;
   cargando: boolean;
 
@@ -26,12 +27,6 @@ export class LoginComponent implements OnInit {
     this.usuario = new UsuarioModel();
   }
 
-  mostrar(){
-    this.authService.guardarToken('abc123def');
-    this.router.navigateByUrl('/home');
-    console.log(this.usuario);
-    this.consultarUsuario();
-  }
 
   onSubmit(f: NgForm){
 

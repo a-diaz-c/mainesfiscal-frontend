@@ -23,10 +23,12 @@ export class ConsultarRfcComponent implements OnInit {
   //resultado de la busqueda 
   estadoLista69: string;
   estadoIncumplidos: string;
+  errorConexion: boolean;
 
   constructor(private authService: AuthService) { 
     this.lista69 = true;
     this.listaIncumplidos = true;
+    this.errorConexion = false;
 
     this.resultadoLista69 = {
       NombreDelContribuyente : "",
@@ -53,6 +55,7 @@ export class ConsultarRfcComponent implements OnInit {
       return;
     }
     
+    this.errorConexion = false;
     if(this.lista69){
       this.buscarLista69(this.buscar_rfc);   
     }
@@ -69,6 +72,7 @@ export class ConsultarRfcComponent implements OnInit {
     },
     (err: HttpErrorResponse) => {
       console.log("Error del servidor");
+      this.errorConexion = true;
     },
     () => {
       this.estadoLista69 = this.getEstadoBusqueda(this.resultadoLista69);
@@ -90,6 +94,7 @@ export class ConsultarRfcComponent implements OnInit {
     },
     (err: HttpErrorResponse) => {
       console.log("Error del servidor");
+      this.errorConexion = true;
     },
     () => {
       this.estadoIncumplidos = this.getEstadoBusqueda(this.resultadoListalocalizados);
