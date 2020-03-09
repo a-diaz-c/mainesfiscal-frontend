@@ -15,17 +15,7 @@ export class PagesComponent implements OnInit {
   }
 
   toggleSlider(){
-
-    if(this.sliderDesplegado === true){
-      this.sliderDesplegado = false;
-
-    }else{
-      this.sliderDesplegado = true;
-
-    }
-
-
-
+    this.sliderDesplegado  = this.sliderDesplegado ? false : true ;
   }
 
 }

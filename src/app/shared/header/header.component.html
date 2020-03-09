@@ -1,50 +1,7 @@
-<!-- Sidebar  -->
-<nav id="sidebar" [ngClass]="{'active': oculto}">
-    <div id="dismiss">
-        <i class="fas fa-arrow-left" (click)="mover()"></i>
-    </div>
-
-    <div class="sidebar-header">
-        <h4>MAINES FISCAL</h4>
-    </div>
-
-    <ul class="list-unstyled components" style="font-family: Montserrat;">
-        <li>
-            <a href="#1" data-toggle="collapse" aria-expanded="false">Maines Fiscal-SAT</a>
-            <ul class="collapse list-unstyled" id="1">
-                <li>
-                    <a href="#">Consultar RFCs Ingresos/Egresos</a>
-                </li>
-                <li>
-                    <a href="#">Consultar por RFC</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#2" data-toggle="collapse" aria-expanded="false">XML Emitidos y Recibidos</a>
-            <ul class="collapse list-unstyled" id="2">
-                <li>
-                    <a href="#">Descargar XMLs - CFDIs desde el SAT</a>
-                </li>
-                <li>
-                    <a href="#">Análisis Fiscal/Impuestos de XMLs descargados</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#3" data-toggle="collapse" aria-expanded="false">Validar CFDIs</a>
-            <ul class="collapse list-unstyled" id="3">
-                <li>
-                    <a href="#">Empresas</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</nav>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;padding: 30px; font-family: Montserrat;">
     <div class="container-fluid" >
-        <button type="button" id="sidebarCollapse" class="btn btn-link" style="text-decoration: none;" (click)="mover()">
+        <button type="button" id="sidebarCollapse" class="btn btn-link" style="text-decoration: none;" (click)="toggleSliderMenu()">
             <img src="../../../assets/imagenes/Kingo_Systems.png" style="width: 60px;margin-right: 10px;">
             <img src="../../../assets/imagenes/Maines_ERP_Logotipo.png" style="width: 250px;">
         </button>
