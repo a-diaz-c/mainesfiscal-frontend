@@ -9,17 +9,18 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private url = 'http://localhost:3800/api/';
+  private urlNode = 'http://localhost:3800/api/';
+  private urlJava = 'http://maines-rest.ddns.net:8080/mainesWeb/';
   userToken: String;
 
   constructor( private http: HttpClient ) { this.userToken = "" }
 
   listalocalizados(rfc: string){
-    return this.http.get(this.url + "buscar/listalocalizados/" + rfc);
+    return this.http.get(this.urlNode + "buscar/listalocalizados/" + rfc);
   }
 
   lista69(rfc: string){
-    return this.http.get(this.url + "buscar/lista69/" + rfc);
+    return this.http.get(this.urlNode + "buscar/lista69/" + rfc);
   }
 
   login(usuario : UsuarioModel){
@@ -38,8 +39,26 @@ export class AuthService {
         'Authorization': 'Basic ' + btoa(usuario.usuario + ':' + usuario.password)
       })
     };
-    return this.http.get("http://maines-rest.ddns.net:8080/mainesWeb/recursos/usuarios/login", headerOptions);
+    return this.http.get(this.urlJava + "recursos/usuarios/login", headerOptions);
   }
+
+  solicitarDescarga(){
+    
+  }
+
+  revisarEstatus(){
+
+  }
+
+  descargarXLM(){
+
+  }
+
+
+
+
+
+
 
   guardarToken(idToken){
     this.userToken = idToken;
