@@ -42,8 +42,8 @@ export class AuthService {
     return this.http.get(this.urlJava + "recursos/usuarios/login", headerOptions);
   }
 
-  solicitarDescarga(){
-    
+  solicitarDescarga(datos){
+    return this.http.post(this.urlJava + "/recursos/co/solicitud", datos);
   }
 
   revisarEstatus(){
