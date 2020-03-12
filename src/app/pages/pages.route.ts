@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { ConsultarRfcComponent } from './consultar-rfc/consultar-rfc.component';
+import { ConfiguracionComponent } from './configuracion/configuracion.component';
 
 
 const pagesRoutes: Routes = [
@@ -13,6 +14,7 @@ const pagesRoutes: Routes = [
         children: [
             { path: "home", component: HomeComponent, canActivate: [AuthGuard]},
             { path: "consultar-rfc", component: ConsultarRfcComponent},
+            { path: "config", component: ConfiguracionComponent},
             { path: "", redirectTo: "/consultar-rfc", pathMatch: "full" }
         ]
     }
