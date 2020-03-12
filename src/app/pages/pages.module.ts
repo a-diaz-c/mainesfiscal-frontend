@@ -13,11 +13,8 @@ import { PagesComponent } from './pages.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ConsultarRfcComponent } from './consultar-rfc/consultar-rfc.component';
-import { DescargarXmlComponent } from './descargar-xml/descargar-xml.component';
 import { MetodoWebserviceComponent } from './descargar-xml/metodo-webservice/metodo-webservice.component';
-
-
-
+import { DescargarXmlComponent } from './descargar-xml/descargar-xml.component';
 
 @NgModule({
   declarations: [

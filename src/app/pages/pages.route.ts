@@ -5,6 +5,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import { ConsultarRfcComponent } from './consultar-rfc/consultar-rfc.component';
 import { DescargarXmlComponent } from './descargar-xml/descargar-xml.component';
 import { MetodoWebserviceComponent } from './descargar-xml/metodo-webservice/metodo-webservice.component';
+import { ConfiguracionComponent } from './configuracion/configuracion.component';
 
 
 const pagesRoutes: Routes = [
@@ -14,10 +15,12 @@ const pagesRoutes: Routes = [
         children: [
             { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
             { path: "consultar-rfc", component: ConsultarRfcComponent },
+            { path: "config", component: ConfiguracionComponent},
             { path: "descargar-xml", component: DescargarXmlComponent, 
                 children: [
                     { path: "metodo-webservice", component: MetodoWebserviceComponent}
-                ]},
+                ]
+            },
             { path: "", redirectTo: "/consultar-rfc", pathMatch: "full" }
         ]
     }
