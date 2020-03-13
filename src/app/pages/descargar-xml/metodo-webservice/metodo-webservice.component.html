@@ -1,5 +1,5 @@
 <div class="login-clean" style="background-color: #fff;padding-top: 40px;padding-bottom: 40px;">
-    <form style="width: 980px;max-width: 1000px;padding: 20px;height: none;font-family: Antic, sans-serif;">
+    <form style="width: 980px;max-width: 1000px;padding: 20px;height: none;font-family: Antic, sans-serif;" [formGroup]="form" (ngSubmit)="solicitarDescarga()">
         <div class="form-group text-center">
             <div class="container text-center" style="padding-left: 11px;width: 920px;margin: 0px;color: rgb(0,0,0);">
                 <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #C3E5E7;height: 50px;font-family: Bahnschrift;font-size: 18px;"><br>Descarga XML desde el SAT -&nbsp; Método Web Service<br><br></p>
@@ -10,23 +10,86 @@
                         </thead>
                         <tbody>
                             <tr class="border-white">
-                                <td class="border-white"><label class="d-inline-block">Fecha Inicial</label><input class="border rounded form-control d-inline-block" type="date" style="width: 190px;margin-left: 10px;" name="fecha_inicial"><input class="border rounded form-control d-inline-block"
-                                        type="time" style="width: 140px;margin-left: 5px;" name="hora_inicial"></td>
-                                <td class="border-white"><label class="d-inline-block">Fecha Final</label><input class="border rounded form-control d-inline-block" type="date" style="width: 190px;margin-left: 10px;" name="fecha_final"><input class="border rounded form-control d-inline-block"
-                                        type="time" style="width: 140px;margin-left: 5px;" name="hora_final"></td>
+                                <td class="border-white">
+                                    <label class="d-inline-block">
+                                    Fecha Inicial
+                                    </label>
+                                    <input class="border rounded form-control d-inline-block" 
+                                            type="date" 
+                                            style="width: 190px;margin-left: 10px;" 
+                                            formControlName="fecha_inicial">
+                                    <input class="border rounded form-control d-inline-block"
+                                            type="time" 
+                                            style="width: 140px;margin-left: 5px;" 
+                                            formControlName="hora_inicial" 
+                                            value="00:00:00">
+                                </td>
+                                <td class="border-white">
+                                    <label class="d-inline-block">Fecha Final</label>
+                                    <input class="border rounded form-control d-inline-block" 
+                                            type="date" 
+                                            style="width: 190px;margin-left: 10px;" 
+                                            formControlName="fecha_final">
+                                    <input class="border rounded form-control d-inline-block"
+                                            type="time" 
+                                            style="width: 140px;margin-left: 5px;" 
+                                            formControlName="hora_final" 
+                                            value="00:00:00">
+                                </td>
                             </tr>
                             <tr>
-                                <td class="border-white"><label class="d-inline-block">Emitidos / Recibidos</label><select class="border rounded form-control d-inline-block" style="width: 285px;margin-left: 10px;font-size: 14px;"><optgroup label="Selecciona una opción"><option value="1" selected="">Emitidos</option><option value="2">Recibidos</option></optgroup></select></td>
-                                <td
-                                    class="border-white"><label class="d-inline-block">Tipo Descarga</label><select class="border rounded form-control d-inline-block" style="width: 320px;margin-left: 10px;font-size: 14px;"><optgroup label="Seleccione una opción"><option value="1" selected="">XML</option><option value="2">Otro</option></optgroup></select></td>
+                                <td class="border-white">
+                                    <label class="d-inline-block">Emitidos / Recibidos</label>
+                                    <select class="border rounded form-control d-inline-block" style="width: 285px;margin-left: 10px;font-size: 14px;" formControlName="origen">
+                                        <optgroup label="Selecciona una opción">
+                                            <option value="emisor" selected="">Emitidos</option>
+                                            <option value="recibidos">Recibidos</option>
+                                        </optgroup>
+                                    </select>
+                                </td>
+                                <td class="border-white">
+                                    <label class="d-inline-block">Tipo Descarga</label>
+                                    <select class="border rounded form-control d-inline-block" style="width: 320px;margin-left: 10px;font-size: 14px;" formControlName="tipo">
+                                        <optgroup label="Seleccione una opción">
+                                            <option value="XML" selected="">XML</option>
+                                            <option value="OTRO">Otro</option>
+                                        </optgroup>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
-                                <td class="border-white"><label class="d-inline-block">Archivo .cer</label><input class="border rounded d-inline-block" type="file" style="margin-left: 10px;width: 340px;" name="archivo_cer" required=""></td>
-                                <td class="border-white"><label class="d-inline-block">Password</label><input class="border rounded form-control d-inline-block" type="text" style="width: 320px;font-size: 14px;margin-left: 40px;" name="password" placeholder="Password"></td>
+                                <td class="border-white">
+                                    <label class="d-inline-block">Archivo .cer</label>
+                                    <input class="border rounded d-inline-block" 
+                                            type="file" 
+                                            style="margin-left: 10px;width: 340px;" 
+                                            name="archivo_cer" 
+                                            (change)="asignar_cer($event)"
+                                            accept=".cer">
+                                </td>
+                                <td class="border-white">
+                                    <label class="d-inline-block">Password</label>
+                                    <input class="border rounded form-control d-inline-block" 
+                                            type="password" style="width: 320px;font-size: 14px;margin-left: 40px;" 
+                                            formControlName="password" 
+                                            placeholder="Password">
+                                </td>
                             </tr>
                             <tr>
-                                <td class="border-white"><label class="d-inline-block">Archivo .key</label><input class="border rounded d-inline-block" type="file" style="margin-left: 8px;width: 335px;" name="archivo_cer" required=""></td>
-                                <td class="text-right border-white"><button class="btn btn-info" type="button" style="width: 320px;margin: 0px;margin-right: px;">Enviar solicitud de descarga</button></td>
+                                <td class="border-white">
+                                    <label class="d-inline-block">Archivo .key</label>
+                                    <input class="border rounded d-inline-block" 
+                                           type="file" 
+                                           style="margin-left: 8px;width: 335px;" 
+                                           name="archivo_key" 
+                                           (change)="asignar_key($event)"
+                                           accept=".key">
+                                </td>
+                                <td class="text-right border-white">
+                                    <button class="btn btn-info" type="submit" style="width: 320px;margin: 0px;margin-right: px;">
+                                        Enviar solicitud de descarga
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -53,7 +116,9 @@
                                 <td>12/03/2020</td>
                                 <td style="font-size: 14Ppx;">ASDGJFKGLHOR</td>
                                 <td>Espera</td>
-                                <td><button class="btn btn-info" type="button" style="font-size: 14px;">Descargar CFDIs</button></td>
+                                <td>
+                                    <button class="btn btn-info" type="button" style="font-size: 14px;">Descargar CFDIs</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -62,3 +127,9 @@
         </div>
     </form>
 </div>
+
+<pre>
+
+    {{ form.value | json }}
+  
+  </pre>

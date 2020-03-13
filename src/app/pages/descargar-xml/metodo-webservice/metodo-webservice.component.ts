@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-metodo-webservice',
@@ -9,41 +10,67 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class MetodoWebserviceComponent implements OnInit {
 
-  datos = {
-    rfc: "",
-    cer_file: "",
-    key_file: "",
-    password: "",
-    fecha_ini: "",
-    fecha_fin: "",
-    hora_ini: "",
-    hora_fin: "",
-    origen: "",
-    tipo: ""
-  }
+  form: FormGroup;
 
-  constructor(private authService: AuthService) { 
+  datos: any;
+  cerBase64: String;
+  keyBase64: String;
+
+  constructor(private authService: AuthService, private fb: FormBuilder) {
+    this.crearFormulario(); 
   }
 
   ngOnInit() {
-    this.datos.rfc = "KSY010331243";
-    this.datos.password = "kingosys";
-    this.datos.fecha_ini = "2020-01-01";
-    this.datos.fecha_fin = "2020-01-25";
-    this.datos.hora_ini = "00:00:00";
-    this.datos.hora_fin = "23:00:40";
-    this.datos.origen = "emisor";
-    this.datos.tipo ="XML";
-    //this.datos.cer_file = this.codificarArchivo(file);
-    //this.datos.key_file = this.codificarArchivo(file);
+  }
+
+  crearFormulario(){
+    this.form = this.fb.group({
+      fecha_inicial: [''],
+      hora_inicial: [''],
+      fecha_final: [''],
+      hora_final: [''],
+      origen: [''],
+      tipo: [''],
+      password: [''],
+    });
   }
 
   solicitarDescarga(){
-    this.authService.solicitarDescarga(this.datos).subscribe(data => {
+    
+    this.datos = this.form.value;
+    this.datos.cer_file = this.cerBase64;
+    this.datos.key_file = this.keyBase64;
+    console.log(this.datos);
+
+    /*this.authService.solicitarDescarga(this.datos).subscribe(data => {
 
     }, (err: HttpErrorResponse) => {
       console.log(`Error servidor remoto. ${err.status} # ${err.message}`)
-    });
+    });*/
+    
+  }
+
+
+  private asignar_cer(fileInput: any){
+    let arreglo = [];
+      const reader = new FileReader();
+            reader.onload = (e: any) => {
+              arreglo = e.target.result.split(",");
+              this.cerBase64 = arreglo[1];
+            };
+
+        reader.readAsDataURL(fileInput.target.files[0]);
+  }
+
+  private asignar_key(fileInput: any){
+    let arreglo = [];
+      const reader = new FileReader();
+            reader.onload = (e: any) => {
+              arreglo = e.target.result.split(",");
+              this.keyBase64 = arreglo[1];
+            };
+
+        reader.readAsDataURL(fileInput.target.files[0]);
   }
 
   private codificarArchivo(fileInput: any){
@@ -51,12 +78,10 @@ export class MetodoWebserviceComponent implements OnInit {
       const reader = new FileReader();
             reader.onload = (e: any) => {
               arreglo = e.target.result.split(",");
-              console.log(arreglo[1]);
+              //console.log(arreglo[1]);
             };
 
         reader.readAsDataURL(fileInput.target.files[0]);
-
-        return arreglo[1];
   }
 
   private validarArchivos(fileInput: any){

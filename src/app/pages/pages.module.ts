@@ -6,7 +6,7 @@ import { PAGES_ROUTES } from "./pages.route";
 
 //modules
 import { SharedModule } from "../shared/shared.module";
-import { FormsModule } from "@angular/forms";
+import { FormsModule,ReactiveFormsModule } from "@angular/forms";
 
 //components
 import { PagesComponent } from './pages.component';
@@ -33,7 +33,8 @@ import { MetodosDescargaComponent } from './descargar-xml/metodos-descarga/metod
     CommonModule,
     PAGES_ROUTES,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }
