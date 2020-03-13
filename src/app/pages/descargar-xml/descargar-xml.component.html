@@ -1,1 +1,62 @@
-<p>descargar-xml works!</p>
+<router-outlet></router-outlet>
+<div class="login-clean" style="background-color: #fff;padding-top: 40px;padding-bottom: 40px;">
+    <form style="width: 1000px;max-width: 1000px;padding: 20px;height: none;font-family: Antic, sans-serif;">
+        <div class="form-group">
+            <div class="container-fluid" style="padding-left: 11px;">
+                <div>
+                    <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #C3E5E7;height: 50px;font-family: Bahnschrift;font-size: 18px;">
+                        <br>Maines ERP - Métodos de descarga XML desde SAT<br><br>
+                    </p>
+                </div>
+            </div>
+            <div class="container">
+                <div class="form-row">
+                    <div class="col" style="padding: 0px;padding-right: 8px;">
+                        <div>
+                            <p class="text-center text-dark d-xl-flex justify-content-xl-center align-items-xl-center" style="background-color: #FFDA45;font-family: Bahnschrift;height: 30px;">
+                                MÉTODO 1 DE DESCARGA: WEB SERVICE
+                            </p>
+                            <div></div>
+                        </div>
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center">
+                            <a class="btn btn-info text-center text-white d-xl-flex justify-content-xl-center align-items-xl-center" role="button" style="font-family: Montserrat, sans-serif;" [routerLink]="['metodo-webservice']">Descargar CFDIs desde el SAT</a>
+                        </div>
+                        <div
+                            class="text-justify text-dark" style="margin-top: 30px;background-color: #e3f2fd;font-size: 14px;color: rgb(0,0,0);">
+                            <strong>Método 1: Web Service</strong>
+                            <p style="color: rgb(0,0,0);">
+                                - Permite decargar hasta 200 mil CFDIs por petición
+                                <br>
+                                - Descarga hasta 1 un millon en metadata
+                            </p>
+                            <strong>Pasos</strong>
+                            <p style="color: rgb(0,0,0);">
+                                1.- Enviar solicitud de descarga
+                                <br>
+                                2.- Esperar respuesta del SAT (puede demorar desde minutos hasta 72 hrs)
+                                <br
+                                >3.- Efectuar descarga de los XML
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col" style="padding: 0px 8px;">
+                        <div>
+                            <p class="text-center text-dark d-xl-flex justify-content-xl-center align-items-xl-center" style="background-color: #FFDA45;font-style: Bahnschrift;font-family: Bahnschrift;height: 30px;">MÉTODO 2 DE DESCARGA: PORTAL SAT&nbsp;</p>
+                        </div>
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center" style="font-family: Montserrat, sans-serif;">
+                            <button class="btn btn-info d-xl-flex justify-content-xl-center align-items-xl-center" type="button" disabled="">Descargar CFDIs desde el SAT</button>
+                        </div>
+                        <div class="text-dark" style="margin-top: 30px;background-color: #e3f2fd;font-size: 14px;color: rgb(0,0,0);">
+                            <strong>Método 2: Conexion a portal del SAT (Tecnica Scraping)</strong>
+                            <p style="color: rgb(0,0,0);">
+                                - Descarga máximo 500 CFDI-XML
+                                <br>
+                                - Descarga inmediata
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -18,7 +18,8 @@ const pagesRoutes: Routes = [
             { path: "config", component: ConfiguracionComponent},
             { path: "descargar-xml", component: DescargarXmlComponent, 
                 children: [
-                    { path: "metodo-webservice", component: MetodoWebserviceComponent}
+                    { path: "", component: DescargarXmlComponent},
+                    { path: "metodo-webservice", component: MetodoWebserviceComponent }
                 ]
             },
             { path: "", redirectTo: "/consultar-rfc", pathMatch: "full" }

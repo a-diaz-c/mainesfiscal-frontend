@@ -15,11 +15,17 @@ import { HomeComponent } from './home/home.component';
 import { ConsultarRfcComponent } from './consultar-rfc/consultar-rfc.component';
 import { MetodoWebserviceComponent } from './descargar-xml/metodo-webservice/metodo-webservice.component';
 import { DescargarXmlComponent } from './descargar-xml/descargar-xml.component';
+import { ConfiguracionComponent } from './configuracion/configuracion.component';
 
 @NgModule({
   declarations: [
     PagesComponent, 
-    LoginComponent, HomeComponent, ConsultarRfcComponent, DescargarXmlComponent, MetodoWebserviceComponent
+    LoginComponent, 
+    HomeComponent, 
+    ConsultarRfcComponent, 
+    DescargarXmlComponent, 
+    MetodoWebserviceComponent,
+    ConfiguracionComponent,
   ],
   imports: [
     CommonModule,
