@@ -36,7 +36,7 @@ export class MetodoWebserviceComponent implements OnInit {
   }
 
   solicitarDescarga(){
-    
+
     this.datos = this.form.value;
     this.datos.cer_file = this.cerBase64;
     this.datos.key_file = this.keyBase64;
