@@ -6,6 +6,7 @@ import { ConsultarRfcComponent } from './consultar-rfc/consultar-rfc.component';
 import { DescargarXmlComponent } from './descargar-xml/descargar-xml.component';
 import { MetodoWebserviceComponent } from './descargar-xml/metodo-webservice/metodo-webservice.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
+import { MetodosDescargaComponent } from './descargar-xml/metodos-descarga/metodos-descarga.component';
 
 
 const pagesRoutes: Routes = [
@@ -18,7 +19,7 @@ const pagesRoutes: Routes = [
             { path: "config", component: ConfiguracionComponent},
             { path: "descargar-xml", component: DescargarXmlComponent, 
                 children: [
-                    { path: "", component: DescargarXmlComponent},
+                    { path: "", component: MetodosDescargaComponent},
                     { path: "metodo-webservice", component: MetodoWebserviceComponent }
                 ]
             },

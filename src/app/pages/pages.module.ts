@@ -16,6 +16,7 @@ import { ConsultarRfcComponent } from './consultar-rfc/consultar-rfc.component';
 import { MetodoWebserviceComponent } from './descargar-xml/metodo-webservice/metodo-webservice.component';
 import { DescargarXmlComponent } from './descargar-xml/descargar-xml.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
+import { MetodosDescargaComponent } from './descargar-xml/metodos-descarga/metodos-descarga.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ConfiguracionComponent } from './configuracion/configuracion.component'
     DescargarXmlComponent, 
     MetodoWebserviceComponent,
     ConfiguracionComponent,
+    MetodosDescargaComponent,
   ],
   imports: [
     CommonModule,
