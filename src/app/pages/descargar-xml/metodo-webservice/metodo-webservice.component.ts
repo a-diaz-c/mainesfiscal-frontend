@@ -17,7 +17,9 @@ export class MetodoWebserviceComponent implements OnInit {
   keyBase64: String;
 
   constructor(private authService: AuthService, private fb: FormBuilder) {
-    this.crearFormulario(); 
+    this.crearFormulario();
+    this.cerBase64 = "";
+    this.keyBase64 = ""; 
   }
 
   ngOnInit() {
@@ -25,17 +27,24 @@ export class MetodoWebserviceComponent implements OnInit {
 
   crearFormulario(){
     this.form = this.fb.group({
-      fecha_inicial: [''],
-      hora_inicial: [''],
-      fecha_final: [''],
-      hora_final: [''],
-      origen: [''],
-      tipo: [''],
-      password: [''],
+      fecha_inicial: ['', Validators.required],
+      hora_inicial: ['', Validators.required],
+      fecha_final: ['', Validators.required],
+      hora_final: ['', Validators.required],
+      origen: ['', Validators.required],
+      tipo: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
   solicitarDescarga(){
+
+    if((this.cerBase64 === "" || this.keyBase64 === "") || this.form.invalid ){
+      console.log("formulario no valido")
+      return;
+    }
+
+    console.log(this.form);
 
     this.datos = this.form.value;
     this.datos.cer_file = this.cerBase64;
