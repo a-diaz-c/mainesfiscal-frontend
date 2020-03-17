@@ -5,6 +5,7 @@
                 <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #C3E5E7;height: 50px;font-family: Bahnschrift;font-size: 18px;"><br>Descarga XML desde el SAT -&nbsp; Método Web Service<br><br>
                 </p>
                 <h6 class="text-danger" *ngIf="fechasNoValidas">Fecha No Valida</h6>
+                <h6 class="text-danger" *ngIf="!archivosIncompletos">Falta un archivo</h6>
                 <div class="table-responsive" style="font-size: 14px;">
                     <table class="table">
                         <thead>
@@ -27,7 +28,9 @@
                                             value="00:00:00">
                                 </td>
                                 <td class="border-white">
-                                    <label class="d-inline-block">Fecha Final</label>
+                                    <label class="d-inline-block">
+                                        Fecha Final
+                                    </label>
                                     <input class="border rounded form-control d-inline-block" 
                                             type="date" 
                                             style="width: 190px;margin-left: 10px;" 
@@ -42,7 +45,7 @@
                             <tr>
                                 <td class="border-white">
                                     <label class="d-inline-block">Emitidos / Recibidos</label>
-                                    <select class="border rounded form-control d-inline-block" style="width: 285px;margin-left: 10px;font-size: 14px;" formControlName="origen">
+                                    <select class="border rounded form-control d-inline-block" style="width: 285px;margin-left: 10px;font-size: 14px;"formControlName="origen">
                                         <optgroup label="Selecciona una opción">
                                             <option value="emisor" selected="">Emitidos</option>
                                             <option value="recibidos">Recibidos</option>
@@ -51,13 +54,12 @@
                                 </td>
                                 <td class="border-white">
                                     <label class="d-inline-block">Tipo Descarga</label>
-                                    <select class="border rounded form-control d-inline-block custom-select" style="width: 320px;margin-left: 10px;font-size: 14px;" formControlName="tipo">
+                                    <select class="border rounded form-control d-inline-block" style="width: 320px;margin-left: 10px;font-size: 14px;" formControlName="tipo">
                                         <optgroup label="Seleccione una opción">
                                             <option value="XML" selected="">XML</option>
-                                            <option value="OTRO">Otro</option>
-                                        </optgroup>
-                                    </select>
-                                </td>
+                                            <option value="OTRO">Otro</option></optgroup>
+                                        </select>
+                                    </td>
                             </tr>
                             <tr>
                                 <td class="border-white">
@@ -67,14 +69,18 @@
                                             style="margin-left: 10px;width: 340px;" 
                                             name="archivo_cer" 
                                             (change)="asignar_cer($event)"
-                                            accept=".cer">
+                                            accept=".cer"
+                                            required>
                                 </td>
                                 <td class="border-white">
                                     <label class="d-inline-block">Password</label>
-                                    <input class="border rounded form-control d-inline-block" 
+                                    <input class="border rounded form-control d-inline-block is-invalid" 
                                             type="password" style="width: 320px;font-size: 14px;margin-left: 40px;" 
                                             formControlName="password" 
                                             placeholder="Password">
+                                    <div class="invalid-feedback" *ngIf="passwordNoValida">
+                                        Ingrese la contraseña
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -85,7 +91,8 @@
                                            style="margin-left: 8px;width: 335px;" 
                                            name="archivo_key" 
                                            (change)="asignar_key($event)"
-                                           accept=".key">
+                                           accept=".key"
+                                           required>
                                 </td>
                                 <td class="text-right border-white">
                                     <button class="btn btn-info" type="submit" style="width: 320px;margin: 0px;margin-right: px;">

@@ -19,12 +19,14 @@ export class MetodoWebserviceComponent implements OnInit {
 
   //validacion
   fechaNoValida: boolean;
+  archivosCompletos: boolean;
 
   constructor(private authService: AuthService, private fb: FormBuilder) {
     this.crearFormulario();
     this.cerBase64 = "";
     this.keyBase64 = ""; 
     this.fechaNoValida = false;
+    this.archivosCompletos = true;
   }
 
   ngOnInit() {
@@ -34,44 +36,62 @@ export class MetodoWebserviceComponent implements OnInit {
     return this.fechaNoValida;
   }
 
+  get passwordNoValida(){
+    return this.form.get('password').invalid && this.form.get('password').touched;
+  }
+
+  get archivosIncompletos(){
+    return this.archivosCompletos;
+  }
+
+  get horaInicialNoValida(){
+    return this.form.get('hora_inicial').valid && this.form.get('hora_inicial').touched;
+  }
+
   crearFormulario(){
     this.form = this.fb.group({
       fecha_inicial: ['', Validators.required],
       hora_inicial: ['', Validators.required],
       fecha_final: ['', Validators.required],
       hora_final: ['', Validators.required],
-      origen: ['', Validators.required],
-      tipo: ['', Validators.required],
-      password: ['', Validators.required],
+      origen: ['emisor'],
+      tipo: ['XML'],
+      password: ['', [Validators.required, Validators.minLength(8)] ],
     });
   }
 
   solicitarDescarga(){
+    this.fechaNoValida = false;
+    this.archivosCompletos = true;
 
-    if((this.cerBase64 === "" || this.keyBase64 === "") || this.form.invalid ){
-      console.log("formulario no valido")
+    console.log(this.form.controls);
+
+    if( this.form.invalid ){
+      console.log("formulario no valido");
+
+      if(this.form.controls.fecha_final.value < this.form.controls.fecha_inicial.value){
+        console.log("Fecha incorrecta");
+        this.fechaNoValida = true;
+        return;
+      }
+  
+      if( this.cerBase64 === "" || this.keyBase64 === ""){
+        this.archivosCompletos = false;
+        return;
+      }
+
       return;
     }
-
-    if(this.form.controls.fecha_final.value < this.form.controls.fecha_inicial.value){
-      console.log("Fecha incorrecta");
-      this.fechaNoValida = true;
-      return;
-    }
-
-    console.log(this.form);
-
     this.datos = this.form.value;
     this.datos.cer_file = this.cerBase64;
     this.datos.key_file = this.keyBase64;
-    this.fechaNoValida = false;
     console.log(this.datos);
 
-    /*this.authService.solicitarDescarga(this.datos).subscribe(data => {
-
+    this.authService.solicitarDescarga(this.datos).subscribe(data => {
+      console.log(data);
     }, (err: HttpErrorResponse) => {
       console.log(`Error servidor remoto. ${err.status} # ${err.message}`)
-    });*/
+    });
     
   }
 
