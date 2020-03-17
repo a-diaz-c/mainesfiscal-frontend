@@ -14,17 +14,29 @@
                         <tbody>
                             <tr class="border-white">
                                 <td class="border-white">
+                                    <label class="d-inline-block">RFC</label>
+                                    <input class="border rounded form-control d-inline-block is-invalid" 
+                                            type="text" style="width: 320px;font-size: 14px;margin-left: 40px;" 
+                                            formControlName="rfc" 
+                                            placeholder="RFC">
+                                    <div class="invalid-feedback" *ngIf="rfcNoValido">
+                                        Ingrese RFC
+                                    </div>
+                                </td> 
+                            </tr>
+                            <tr class="border-white">
+                                <td class="border-white">
                                     <label class="d-inline-block">
                                     Fecha Inicial
                                     </label>
                                     <input class="border rounded form-control d-inline-block " 
                                             type="date" 
                                             style="width: 190px;margin-left: 10px;" 
-                                            formControlName="fecha_inicial">
+                                            formControlName="fecha_ini">
                                     <input class="border rounded form-control d-inline-block"
                                             type="time" 
                                             style="width: 140px;margin-left: 5px;" 
-                                            formControlName="hora_inicial" 
+                                            formControlName="hora_ini" 
                                             value="00:00:00">
                                 </td>
                                 <td class="border-white">
@@ -34,11 +46,11 @@
                                     <input class="border rounded form-control d-inline-block" 
                                             type="date" 
                                             style="width: 190px;margin-left: 10px;" 
-                                            formControlName="fecha_final">
+                                            formControlName="fecha_fin">
                                     <input class="border rounded form-control d-inline-block"
                                             type="time" 
                                             style="width: 140px;margin-left: 5px;" 
-                                            formControlName="hora_final" 
+                                            formControlName="hora_fin" 
                                             value="00:00:00">
                                 </td>
                             </tr>

@@ -40,6 +40,10 @@ export class MetodoWebserviceComponent implements OnInit {
     return this.form.get('password').invalid && this.form.get('password').touched;
   }
 
+  get rfcNoValido(){
+    return this.form.get('rfc').invalid && this.form.get('rfc').touched;
+  }
+
   get archivosIncompletos(){
     return this.archivosCompletos;
   }
@@ -50,13 +54,14 @@ export class MetodoWebserviceComponent implements OnInit {
 
   crearFormulario(){
     this.form = this.fb.group({
-      fecha_inicial: ['', Validators.required],
-      hora_inicial: ['', Validators.required],
-      fecha_final: ['', Validators.required],
-      hora_final: ['', Validators.required],
+      RFC: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(13)] ],
+      fecha_ini: ['', Validators.required],
+      hora_ini: ['', Validators.required],
+      fecha_fin: ['', Validators.required],
+      hora_fin: ['', Validators.required],
       origen: ['emisor'],
       tipo: ['XML'],
-      password: ['', [Validators.required, Validators.minLength(8)] ],
+      Pass: ['', [Validators.required, Validators.minLength(8)] ],
     });
   }
 
@@ -74,17 +79,17 @@ export class MetodoWebserviceComponent implements OnInit {
         this.fechaNoValida = true;
         return;
       }
-  
-      if( this.cerBase64 === "" || this.keyBase64 === ""){
-        this.archivosCompletos = false;
-        return;
-      }
 
       return;
     }
+    
+    if( this.cerBase64 === "" || this.keyBase64 === ""){
+      this.archivosCompletos = false;
+      return;
+    }
     this.datos = this.form.value;
-    this.datos.cer_file = this.cerBase64;
-    this.datos.key_file = this.keyBase64;
+    this.datos.CER_file = this.cerBase64;
+    this.datos.Key_file = this.keyBase64;
     console.log(this.datos);
 
     this.authService.solicitarDescarga(this.datos).subscribe(data => {

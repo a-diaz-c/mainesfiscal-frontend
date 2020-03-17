@@ -43,7 +43,15 @@ export class AuthService {
   }
 
   solicitarDescarga(datos){
-    return this.http.post(this.urlJava + "/recursos/co/solicitud", datos);
+
+    const headerOptions  = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin':'Content-Type',
+        'Content-Type':  'application/json',
+      })
+    };
+
+    return this.http.post(this.urlJava + "/recursos/co/solicitud", datos, headerOptions);
   }
 
   revisarEstatus(){
