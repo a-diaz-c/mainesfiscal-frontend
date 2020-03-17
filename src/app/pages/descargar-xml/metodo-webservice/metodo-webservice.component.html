@@ -2,7 +2,9 @@
     <form style="width: 980px;max-width: 1000px;padding: 20px;height: none;font-family: Antic, sans-serif;" [formGroup]="form" (ngSubmit)="solicitarDescarga()">
         <div class="form-group text-center">
             <div class="container text-center" style="padding-left: 11px;width: 920px;margin: 0px;color: rgb(0,0,0);">
-                <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #C3E5E7;height: 50px;font-family: Bahnschrift;font-size: 18px;"><br>Descarga XML desde el SAT -&nbsp; Método Web Service<br><br></p>
+                <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #C3E5E7;height: 50px;font-family: Bahnschrift;font-size: 18px;"><br>Descarga XML desde el SAT -&nbsp; Método Web Service<br><br>
+                </p>
+                <h6 class="text-danger" *ngIf="fechasNoValidas">Fecha No Valida</h6>
                 <div class="table-responsive" style="font-size: 14px;">
                     <table class="table">
                         <thead>
@@ -14,7 +16,7 @@
                                     <label class="d-inline-block">
                                     Fecha Inicial
                                     </label>
-                                    <input class="border rounded form-control d-inline-block" 
+                                    <input class="border rounded form-control d-inline-block " 
                                             type="date" 
                                             style="width: 190px;margin-left: 10px;" 
                                             formControlName="fecha_inicial">
@@ -49,7 +51,7 @@
                                 </td>
                                 <td class="border-white">
                                     <label class="d-inline-block">Tipo Descarga</label>
-                                    <select class="border rounded form-control d-inline-block" style="width: 320px;margin-left: 10px;font-size: 14px;" formControlName="tipo">
+                                    <select class="border rounded form-control d-inline-block custom-select" style="width: 320px;margin-left: 10px;font-size: 14px;" formControlName="tipo">
                                         <optgroup label="Seleccione una opción">
                                             <option value="XML" selected="">XML</option>
                                             <option value="OTRO">Otro</option>

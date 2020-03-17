@@ -12,17 +12,26 @@ export class MetodoWebserviceComponent implements OnInit {
 
   form: FormGroup;
 
+  //para enviar en la peticion
   datos: any;
   cerBase64: String;
   keyBase64: String;
+
+  //validacion
+  fechaNoValida: boolean;
 
   constructor(private authService: AuthService, private fb: FormBuilder) {
     this.crearFormulario();
     this.cerBase64 = "";
     this.keyBase64 = ""; 
+    this.fechaNoValida = false;
   }
 
   ngOnInit() {
+  }
+
+  get fechasNoValidas(){
+    return this.fechaNoValida;
   }
 
   crearFormulario(){
@@ -44,11 +53,18 @@ export class MetodoWebserviceComponent implements OnInit {
       return;
     }
 
+    if(this.form.controls.fecha_final.value < this.form.controls.fecha_inicial.value){
+      console.log("Fecha incorrecta");
+      this.fechaNoValida = true;
+      return;
+    }
+
     console.log(this.form);
 
     this.datos = this.form.value;
     this.datos.cer_file = this.cerBase64;
     this.datos.key_file = this.keyBase64;
+    this.fechaNoValida = false;
     console.log(this.datos);
 
     /*this.authService.solicitarDescarga(this.datos).subscribe(data => {
