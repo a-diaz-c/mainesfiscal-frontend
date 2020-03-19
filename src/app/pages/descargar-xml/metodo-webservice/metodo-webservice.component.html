@@ -6,6 +6,9 @@
                 </p>
                 <h6 class="text-danger" *ngIf="fechasNoValidas">Fecha No Valida</h6>
                 <h6 class="text-danger" *ngIf="!archivosIncompletos">Falta un archivo</h6>
+                <div class="alert alert-danger" role="alert" *ngIf="!respuestaSolicitus">
+                    {{mensaje}}
+                </div>
                 <div class="table-responsive" style="font-size: 14px;">
                     <table class="table">
                         <thead>
@@ -25,7 +28,7 @@
                                 </td>-->
                                 <td class="border-white">
                                     <label class="d-inline-block">Lista de RFCs &nbsp; &nbsp; &nbsp; &nbsp;</label>
-                                    <select class="border rounded form-control d-inline-block" style="width: 285px;margin-left: 10px;font-size: 14px;"formControlName="RFC">
+                                    <select class="border rounded form-control d-inline-block" style="width: 285px;margin-left: 10px;font-size: 14px;"formControlName="rfc">
                                         <optgroup label="Selecciona un RFC">
                                             <option *ngFor="let rfc of listaRFCs" [value]="rfc.rfc">{{rfc.rfc}}</option>
                                         </optgroup>
@@ -96,7 +99,7 @@
                                     <label class="d-inline-block">Password</label>
                                     <input class="border rounded form-control d-inline-block is-invalid" 
                                             type="password" style="width: 320px;font-size: 14px;margin-left: 40px;" 
-                                            formControlName="Pass" 
+                                            formControlName="password" 
                                             placeholder="Password">
                                     <div class="invalid-feedback" *ngIf="passwordNoValida">
                                         Ingrese la contraseña

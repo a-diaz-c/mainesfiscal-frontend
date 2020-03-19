@@ -18,17 +18,20 @@ export class MetodoWebserviceComponent implements OnInit {
   keyBase64: String;
 
   //validacion
-  fechaNoValida: boolean;
-  archivosCompletos: boolean;
+  fechaNoValida: boolean = false;
+  archivosCompletos: boolean = true;
+  respuestaSolicitud: boolean = true;
 
+  //respuestas
   listaRFCs: any;
+  datosSolicitud: any;
+  mensaje: string = "";
 
   constructor(private authService: AuthService, private fb: FormBuilder) {
     this.crearFormulario();
     this.cerBase64 = "";
     this.keyBase64 = ""; 
-    this.fechaNoValida = false;
-    this.archivosCompletos = true;
+
   }
 
   ngOnInit() {
@@ -40,11 +43,11 @@ export class MetodoWebserviceComponent implements OnInit {
   }
 
   get passwordNoValida(){
-    return this.form.get('Pass').invalid && this.form.get('Pass').touched;
+    return this.form.get('password').invalid && this.form.get('password').touched;
   }
 
   get rfcNoValido(){
-    return this.form.get('RFC').invalid && this.form.get('RFC').touched;
+    return this.form.get('rfc').invalid && this.form.get('rfc').touched;
   }
 
   get archivosIncompletos(){
@@ -57,14 +60,14 @@ export class MetodoWebserviceComponent implements OnInit {
 
   crearFormulario(){
     this.form = this.fb.group({
-      RFC: [localStorage.getItem('rfc'), [Validators.required] ],
+      rfc: [localStorage.getItem('rfc'), [Validators.required] ],
       fecha_ini: ['', Validators.required],
       hora_ini: ['', Validators.required],
       fecha_fin: ['', Validators.required],
       hora_fin: ['', Validators.required],
       origen: ['emisor'],
       tipo: ['XML'],
-      Pass: ['', [Validators.required, Validators.minLength(8)] ],
+      password: ['', [Validators.required, Validators.minLength(8)] ],
     });
   }
 
@@ -89,13 +92,18 @@ export class MetodoWebserviceComponent implements OnInit {
       this.archivosCompletos = false;
       return;
     }
+
     this.datos = this.form.value;
-    this.datos.CER_file = this.cerBase64;
-    this.datos.Key_file = this.keyBase64;
+    this.datos.cer_file = this.cerBase64;
+    this.datos.key_file = this.keyBase64;
     console.log(this.datos);
 
     this.authService.solicitarDescarga(this.datos).subscribe(data => {
-      console.log(data);
+      this.datosSolicitud = data;
+      this.respuestaSolicitud = this.datosSolicitud.resp;
+      this.mensaje = this.datosSolicitud.mensaje;
+      console.log(this.datosSolicitud);
+      
     }, (err: HttpErrorResponse) => {
       console.log(`Error servidor remoto. ${err.status} # ${err.message}`)
     });
