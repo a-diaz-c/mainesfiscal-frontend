@@ -17,6 +17,8 @@ import { MetodoWebserviceComponent } from './descargar-xml/metodo-webservice/met
 import { DescargarXmlComponent } from './descargar-xml/descargar-xml.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
 import { MetodosDescargaComponent } from './descargar-xml/metodos-descarga/metodos-descarga.component';
+import { AltaEmpresaComponent } from './alta-empresa/alta-empresa.component';
+import { AltaRFCComponent } from './alta-rfc/alta-rfc.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { MetodosDescargaComponent } from './descargar-xml/metodos-descarga/metod
     MetodoWebserviceComponent,
     ConfiguracionComponent,
     MetodosDescargaComponent,
+    AltaEmpresaComponent,
+    AltaRFCComponent,
   ],
   imports: [
     CommonModule,
