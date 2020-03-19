@@ -12,6 +12,7 @@ export class AuthService {
   private urlNode = 'http://localhost:3800/api/';
   private urlJava = 'http://maines-rest.ddns.net:8080/mainesWeb/';
   userToken: String;
+  user: UsuarioModel;
 
   constructor( private http: HttpClient ) { this.userToken = "" }
 
@@ -39,11 +40,15 @@ export class AuthService {
         'Authorization': 'Basic ' + btoa(usuario.usuario + ':' + usuario.password)
       })
     };
-    return this.http.get(this.urlJava + "recursos/usuarios/login", headerOptions);
+    return this.http.get(this.urlJava + "recursos/usuarios/login", headerOptions)
+            .pipe(
+              map(resp => {
+                this.guardarDatosUsuario(resp);
+              })
+            );
   }
 
   solicitarDescarga(datos){
-
     const headerOptions  = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin':'Content-Type',
@@ -62,10 +67,11 @@ export class AuthService {
 
   }
 
-
-
-
-
+  guardarDatosUsuario(datos: any){
+    localStorage.setItem('rfc', datos.msg.rfc);
+    localStorage.setItem('razon_social', datos.msg.razon_social);
+    localStorage.setItem('clave_usuario', datos.msg.clave_usuario);
+  }
 
 
   guardarToken(idToken){

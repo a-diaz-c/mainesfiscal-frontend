@@ -41,7 +41,7 @@ export class MetodoWebserviceComponent implements OnInit {
   }
 
   get rfcNoValido(){
-    return this.form.get('rfc').invalid && this.form.get('rfc').touched;
+    return this.form.get('RFC').invalid && this.form.get('RFC').touched;
   }
 
   get archivosIncompletos(){
@@ -100,6 +100,8 @@ export class MetodoWebserviceComponent implements OnInit {
     
   }
 
+  
+
 
   private asignar_cer(fileInput: any){
     let arreglo = [];
@@ -132,10 +134,6 @@ export class MetodoWebserviceComponent implements OnInit {
             };
 
         reader.readAsDataURL(fileInput.target.files[0]);
-  }
-
-  private validarArchivos(fileInput: any){
-    
   }
 
 }
