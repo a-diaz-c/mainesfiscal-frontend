@@ -40,12 +40,7 @@ export class AuthService {
         'Authorization': 'Basic ' + btoa(usuario.usuario + ':' + usuario.password)
       })
     };
-    return this.http.get(this.urlJava + "recursos/usuarios/login", headerOptions)
-            .pipe(
-              map(resp => {
-                this.guardarDatosUsuario(resp);
-              })
-            );
+    return this.http.get(this.urlJava + "recursos/usuarios/login", headerOptions);
   }
 
   solicitarDescarga(datos){
@@ -56,7 +51,7 @@ export class AuthService {
       })
     };
 
-    return this.http.post(this.urlJava + "/recursos/co/solicitud", datos, headerOptions);
+    return this.http.post(this.urlJava + "recursos/co/solicitud", datos, headerOptions);
   }
 
   revisarEstatus(){
@@ -64,15 +59,23 @@ export class AuthService {
   }
 
   descargarXLM(){
+    
+  }
 
+  listarRFCs(clave_cliente){
+    return this.http.get(this.urlJava + "recursos/rfc/lista/" + clave_cliente)
+                    .pipe(
+                      map(resp => {
+                        return resp['msg'];
+                      })
+                    );
   }
 
   guardarDatosUsuario(datos: any){
-    localStorage.setItem('rfc', datos.msg.rfc);
-    localStorage.setItem('razon_social', datos.msg.razon_social);
-    localStorage.setItem('clave_usuario', datos.msg.clave_usuario);
+    localStorage.setItem('rfc', datos.rfc);
+    localStorage.setItem('razon_social', datos.razon_social);
+    localStorage.setItem('clave_cliente', datos.clave_cliente);
   }
-
 
   guardarToken(idToken){
     this.userToken = idToken;

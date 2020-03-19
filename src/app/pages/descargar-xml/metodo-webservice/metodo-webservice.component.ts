@@ -21,6 +21,8 @@ export class MetodoWebserviceComponent implements OnInit {
   fechaNoValida: boolean;
   archivosCompletos: boolean;
 
+  listaRFCs: any;
+
   constructor(private authService: AuthService, private fb: FormBuilder) {
     this.crearFormulario();
     this.cerBase64 = "";
@@ -30,6 +32,7 @@ export class MetodoWebserviceComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ListaRFCs();
   }
 
   get fechasNoValidas(){
@@ -37,7 +40,7 @@ export class MetodoWebserviceComponent implements OnInit {
   }
 
   get passwordNoValida(){
-    return this.form.get('password').invalid && this.form.get('password').touched;
+    return this.form.get('Pass').invalid && this.form.get('Pass').touched;
   }
 
   get rfcNoValido(){
@@ -54,7 +57,7 @@ export class MetodoWebserviceComponent implements OnInit {
 
   crearFormulario(){
     this.form = this.fb.group({
-      RFC: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(13)] ],
+      RFC: [localStorage.getItem('rfc'), [Validators.required] ],
       fecha_ini: ['', Validators.required],
       hora_ini: ['', Validators.required],
       fecha_fin: ['', Validators.required],
@@ -73,13 +76,12 @@ export class MetodoWebserviceComponent implements OnInit {
 
     if( this.form.invalid ){
       console.log("formulario no valido");
+      return;
+    }
 
-      if(this.form.controls.fecha_final.value < this.form.controls.fecha_inicial.value){
-        console.log("Fecha incorrecta");
-        this.fechaNoValida = true;
-        return;
-      }
-
+    if(this.form.controls.fecha_fin.value < this.form.controls.fecha_ini.value){
+      console.log("Fecha incorrecta");
+      this.fechaNoValida = true;
       return;
     }
     
@@ -100,7 +102,12 @@ export class MetodoWebserviceComponent implements OnInit {
     
   }
 
-  
+  ListaRFCs(){
+    this.authService.listarRFCs("100").subscribe(data => {
+      console.log(data);
+      this.listaRFCs = data;
+    })
+  }
 
 
   private asignar_cer(fileInput: any){

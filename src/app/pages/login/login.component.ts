@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
 
       console.log(this.respuesta.msg);
       this.authService.guardarToken('abc123def');
+      this.authService.guardarDatosUsuario(this.respuesta.msg);
       this.router.navigateByUrl('/home');
     }else{
 
