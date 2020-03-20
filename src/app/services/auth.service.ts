@@ -97,6 +97,8 @@ export class AuthService {
   }
 
   estaAutenticado(): boolean{
+    this.leerToke();
+    console.log(this.userToken.length);
     if(this.userToken.length < 2){
       return false;
     }
