@@ -63,12 +63,7 @@ export class AuthService {
   }
 
   listarRFCs(clave_cliente){
-    return this.http.get(this.urlJava + "recursos/rfc/lista/" + clave_cliente)
-                    .pipe(
-                      map(resp => {
-                        return resp['msg'];
-                      })
-                    );
+    return this.http.get(this.urlJava + "recursos/rfc/lista/" + clave_cliente);
   }
 
   guardarDatosUsuario(datos: any){

@@ -23,7 +23,7 @@ export class MetodoWebserviceComponent implements OnInit {
   respuestaSolicitud: boolean = true;
 
   //respuestas
-  listaRFCs: any;
+  listaRFCs: any = [];
   datosSolicitud: any;
   mensaje: string = "";
 
@@ -35,7 +35,7 @@ export class MetodoWebserviceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ListaRFCs();
+    this.ListaRFCs(localStorage.getItem('clave_cliente'));
   }
 
   get fechasNoValidas(){
@@ -71,13 +71,19 @@ export class MetodoWebserviceComponent implements OnInit {
     });
   }
 
+  ListaRFCs(clave: string){
+    this.authService.listarRFCs(clave).subscribe( (data: any) => {
+      console.log(data);
+      data.resp ? this.listaRFCs = data.msg : this.listaRFCs = [];
+      
+    })
+  }
+
   solicitarDescarga(){
     this.fechaNoValida = false;
     this.archivosCompletos = true;
 
-    console.log(this.form.controls);
-
-    
+    console.log(this.form.controls);    
 
     if(this.form.controls.fecha_fin.value < this.form.controls.fecha_ini.value){
       console.log("Fecha incorrecta");
@@ -106,14 +112,6 @@ export class MetodoWebserviceComponent implements OnInit {
     });
     
   }
-
-  ListaRFCs(){
-    this.authService.listarRFCs("100").subscribe(data => {
-      console.log(data);
-      this.listaRFCs = data;
-    })
-  }
-
 
   private asignar_cer(fileInput: any){
     let arreglo = [];
