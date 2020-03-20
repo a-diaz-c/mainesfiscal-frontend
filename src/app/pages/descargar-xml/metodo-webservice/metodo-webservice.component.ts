@@ -62,9 +62,9 @@ export class MetodoWebserviceComponent implements OnInit {
     this.form = this.fb.group({
       rfc: [localStorage.getItem('rfc'), [Validators.required] ],
       fecha_ini: ['', Validators.required],
-      hora_ini: ['', Validators.required],
+      hora_ini: ['00:00:00', Validators.required],
       fecha_fin: ['', Validators.required],
-      hora_fin: ['', Validators.required],
+      hora_fin: ['23:59:59', Validators.required],
       origen: ['emisor'],
       tipo: ['XML'],
       password: ['', [Validators.required, Validators.minLength(8)] ],
@@ -77,10 +77,7 @@ export class MetodoWebserviceComponent implements OnInit {
 
     console.log(this.form.controls);
 
-    if( this.form.invalid ){
-      console.log("formulario no valido");
-      return;
-    }
+    
 
     if(this.form.controls.fecha_fin.value < this.form.controls.fecha_ini.value){
       console.log("Fecha incorrecta");
