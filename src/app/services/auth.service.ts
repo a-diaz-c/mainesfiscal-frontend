@@ -54,16 +54,22 @@ export class AuthService {
     return this.http.post(this.urlJava + "recursos/co/solicitud", datos, headerOptions);
   }
 
-  revisarEstatus(){
-
-  }
-
-  descargarXLM(){
-    
+  getSolicitudes(rfc){
+    return this.http.get(this.urlJava + "recursos/solicitudes/lista/" + rfc);
   }
 
   listarRFCs(clave_cliente){
     return this.http.get(this.urlJava + "recursos/rfc/lista/" + clave_cliente);
+  }
+
+  descargarXML(datos){
+    const headerOptions  = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin':'Content-Type',
+        'Content-Type':  'application/json',
+      })
+    };
+    return this.http.post(this.urlJava + "/recursos/co/verificarydescargar/", datos, headerOptions);
   }
 
   guardarDatosUsuario(datos: any){

@@ -14,8 +14,15 @@ export class MetodoWebserviceComponent implements OnInit {
 
   //para enviar en la peticion
   datos: any;
-  cerBase64: String;
-  keyBase64: String;
+  cerBase64: string;
+  keyBase64: string;
+  datosDescarga = {
+    id_solicitud: "",
+    rfc:"",
+    cer_file:"",
+    key_file:"",
+    password:""
+  };
 
   //validacion
   fechaNoValida: boolean = false;
@@ -23,7 +30,8 @@ export class MetodoWebserviceComponent implements OnInit {
   respuestaSolicitud: boolean = true;
 
   //respuestas
-  listaRFCs: any = [];
+  listaRFCs;
+  listaSolicitudes;
   datosSolicitud: any;
   mensaje: string = "";
 
@@ -35,7 +43,8 @@ export class MetodoWebserviceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ListaRFCs(localStorage.getItem('clave_cliente'));
+    this.listarRFCs(localStorage.getItem('clave_cliente'));
+    this.listarSolicitudes('KSY010331243');
   }
 
   get fechasNoValidas(){
@@ -71,12 +80,19 @@ export class MetodoWebserviceComponent implements OnInit {
     });
   }
 
-  ListaRFCs(clave: string){
+  listarRFCs(clave: string){
     this.authService.listarRFCs(clave).subscribe( (data: any) => {
       console.log(data);
       data.resp ? this.listaRFCs = data.msg : this.listaRFCs = [];
       
-    })
+    });
+  }
+
+  listarSolicitudes(rfc: string){
+    this.authService.getSolicitudes(rfc).subscribe( (data: any ) => {
+      console.log(data);
+      data.resp ? this.listaSolicitudes = data.msg : this.listaSolicitudes = [];
+    });
   }
 
   solicitarDescarga(){
@@ -111,6 +127,20 @@ export class MetodoWebserviceComponent implements OnInit {
       console.log(`Error servidor remoto. ${err.status} # ${err.message}`)
     });
     
+  }
+
+  descargarXML(id_solicitud: string){
+    this.datosDescarga.id_solicitud = id_solicitud;
+    this.datosDescarga.cer_file = this.cerBase64;
+    this.datosDescarga.key_file = this.keyBase64;
+    this.datosDescarga.password = this.form.get('password').value;
+    this.datosDescarga.rfc = this.form.get('rfc').value;
+
+    console.log(this.datosDescarga);
+
+    this.authService.descargarXML(this.datosDescarga).subscribe( data => {
+      console.log(data);
+    });
   }
 
   private asignar_cer(fileInput: any){
