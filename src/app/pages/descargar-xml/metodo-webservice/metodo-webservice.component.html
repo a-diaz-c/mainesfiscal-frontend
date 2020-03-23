@@ -32,7 +32,12 @@
                                         <optgroup label="Selecciona un RFC">
                                             <option *ngFor="let rfc of listaRFCs" [value]="rfc.rfc">{{rfc.rfc}}</option>
                                         </optgroup>
-                                    </select>
+                                    </select>                                  
+                                </td>
+                                <td>
+                                    <div class="text-danger" *ngIf="rfcNoValido">
+                                        RFC no valido
+                                    </div>
                                 </td> 
                             </tr>
                             <tr class="border-white">
@@ -102,7 +107,7 @@
                                             formControlName="password" 
                                             placeholder="Password">
                                     <div class="invalid-feedback" *ngIf="passwordNoValida">
-                                        Ingrese la contraseña
+                                        Contraseña no valida
                                     </div>
                                 </td>
                             </tr>

@@ -6,39 +6,61 @@
 
     <ul class="list-unstyled components" style="text-decoration: none;">
         <li>
-            <a href="#1" data-toggle="collapse" aria-expanded="false" style="font-size: 14px;">MAINES FISCAL SAT</a>
+            <a href="#1" data-toggle="collapse" aria-expanded="false" style="font-size: 14px;">XML - CFDIs DESDE SAT</a>
             <ul class="collapse list-unstyled" id="1">
                 <li>
-                    <a href="#">Consultar RFCs Ingresos/Egresos</a>
-                </li>
-                <li>
-                    <a [routerLink]="['/consultar-rfc']" >Consultar por RFC</a>
+                    <a [routerLink]="['/descargar-xml']">Descargar XMLs desde SAT</a>
                 </li>
             </ul>
         </li>
         <li>
-            <a href="#2" data-toggle="collapse" aria-expanded="false" style="font-size: 14px;">XML EMITIDOS/RECIBIDOS</a>
+            <a href="#2" data-toggle="collapse" aria-expanded="false" style="font-size: 14px;">IMPRIMIR PDFs - EXCEL</a>
             <ul class="collapse list-unstyled" id="2">
                 <li>
-                    <a [routerLink]="['/descargar-xml']">Descargar XML - CFDIs desde el SAT</a>
+                    <a href="#">Generar PDFs</a>
                 </li>
                 <li>
-                    <a href="#">Análisis Fiscal/Impuestos de XMLs descargados</a>
+                    <a href="#">Hoja de resumen en Excel</a>
                 </li>
             </ul>
         </li>
         <li>
-            <a href="#3" data-toggle="collapse" aria-expanded="false" style="font-size: 14px;">VALIDAR CFDIS</a>
+            <a href="#3" data-toggle="collapse" aria-expanded="false" style="font-size: 14px;">ANALIZAR XMLs DESCARGADOS</a>
             <ul class="collapse list-unstyled" id="3">
                 <li>
-                    <a href="#">Empresas</a>
+                    <a href="#">Detectar XMLs duplicados</a>
+                </li>
+                <li>
+                    <a href="#">Resumen de impuestos</a>
+                </li>
+                <li>
+                    <a href="#">Listas negras del SAT (ADOS/EFOS)</a>
+                </li>
+                <li>
+                    <a href="#">Generar DIOT</a>
                 </li>
             </ul>
         </li>
-
         <li>
-            <a href="#4" data-toggle="collapse" aria-expanded="false" style="font-size: 14px;">CONFIGURACION</a>
+            <a href="#4" data-toggle="collapse" aria-expanded="false" style="font-size: 14px;">CONTABILIDAD A PARTIR DE XMLs DESCARGADOS</a>
             <ul class="collapse list-unstyled" id="4">
+                <li>
+                    <a href="#">Generar contabilidad electrónica</a>
+                </li>
+                <li>
+                    <a href="#">Generar Polizas contables</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a data-toggle="collapse" aria-expanded="false" style="font-size: 14px;" [routerLink]="['/consultar-rfc']" >
+                BUSCAR RFC EN LISTAS NEGRAS DEL SAT
+            </a>
+        </li>
+        
+        <li>
+            <a href="#6" data-toggle="collapse" aria-expanded="false" style="font-size: 14px;">CONFIGURACION</a>
+            <ul class="collapse list-unstyled" id="6">
                 <li>
                     <a [routerLink]="['/alta-rfc']">Alta RFC emisor y Credenciales</a>
                 </li>

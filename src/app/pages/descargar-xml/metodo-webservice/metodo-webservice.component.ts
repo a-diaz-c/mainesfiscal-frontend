@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { saveAs } from 'file-saver';
+import { Validaciones } from './validaciones';
 
 @Component({
   selector: 'app-metodo-webservice',
@@ -36,8 +37,8 @@ export class MetodoWebserviceComponent implements OnInit {
   listaSolicitudes;
   datosSolicitud: any;
   mensaje: string = "";
-  fileUrl;
-
+  validar = new Validaciones();
+  
   constructor(private authService: AuthService, private fb: FormBuilder, private sanitizer: DomSanitizer) {
     this.crearFormulario();
     this.cerBase64 = "";
@@ -72,10 +73,10 @@ export class MetodoWebserviceComponent implements OnInit {
 
   crearFormulario(){
     this.form = this.fb.group({
-      rfc: [localStorage.getItem('rfc'), [Validators.required] ],
-      fecha_ini: ['', Validators.required],
+      rfc: ['', [Validators.required] ],
+      fecha_ini: [this.fechaActual(), Validators.required],
       hora_ini: ['00:00:00', Validators.required],
-      fecha_fin: ['', Validators.required],
+      fecha_fin: [this.fechaActual(), Validators.required],
       hora_fin: ['23:59:59', Validators.required],
       origen: ['emisor'],
       tipo: ['XML'],
@@ -87,7 +88,6 @@ export class MetodoWebserviceComponent implements OnInit {
     this.authService.listarRFCs(clave).subscribe( (data: any) => {
       console.log(data);
       data.resp ? this.listaRFCs = data.msg : this.listaRFCs = [];
-      
     });
   }
 
@@ -102,9 +102,12 @@ export class MetodoWebserviceComponent implements OnInit {
     this.fechaNoValida = false;
     this.archivosCompletos = true;
 
-    console.log(this.form.controls);    
+    console.log(this.form);    
 
-    if(!this.form.valid){
+    if(this.form.invalid){
+      Object.values(this.form.controls).forEach( control => {
+        control.markAsTouched();
+      })
       return;
     }
 
@@ -124,7 +127,7 @@ export class MetodoWebserviceComponent implements OnInit {
     this.datos.key_file = this.keyBase64;
     console.log(this.datos);
 
-    this.authService.solicitarDescarga(this.datos).subscribe(data => {
+    /*this.authService.solicitarDescarga(this.datos).subscribe(data => {
       this.datosSolicitud = data;
       this.respuestaSolicitud = this.datosSolicitud.resp;
       this.mensaje = this.datosSolicitud.msg;
@@ -132,7 +135,7 @@ export class MetodoWebserviceComponent implements OnInit {
       
     }, (err: HttpErrorResponse) => {
       console.log(`Error servidor remoto. ${err.status} # ${err.message}`)
-    });
+    });*/
     
   }
 
@@ -175,6 +178,7 @@ export class MetodoWebserviceComponent implements OnInit {
 
   private asignar_cer(fileInput: any){
     let arreglo = [];
+    if(this.validarArchivo(fileInput.target.files[0].name, "cer")){
       const reader = new FileReader();
             reader.onload = (e: any) => {
               arreglo = e.target.result.split(",");
@@ -182,10 +186,15 @@ export class MetodoWebserviceComponent implements OnInit {
             };
 
         reader.readAsDataURL(fileInput.target.files[0]);
+    }else{
+      console.log("No valido");
+    }
   }
 
   private asignar_key(fileInput: any){
     let arreglo = [];
+    
+    if(this.validarArchivo(fileInput.target.files[0].name, "key")){
       const reader = new FileReader();
             reader.onload = (e: any) => {
               arreglo = e.target.result.split(",");
@@ -193,6 +202,40 @@ export class MetodoWebserviceComponent implements OnInit {
             };
 
         reader.readAsDataURL(fileInput.target.files[0]);
+    }else{
+      console.log("No valido"); 
+    }
+
+    
+  }
+
+  private validarArchivo(name, extensionValida){
+    let extesion = name.split(".");
+
+    if( extesion[extesion.length - 1 ] === extensionValida){
+      return true;
+    }else{
+      this.cerBase64 = "";
+      return false;
+    }
+  }
+
+  private fechaActual (): string{
+    let fecha = new Date();
+    let dia = fecha.getDate();
+    let mes = fecha.getMonth() + 1;
+    let anio = fecha.getFullYear();
+
+    var diaSalida = dia.toString();
+    var mesSalida = mes.toString(); 
+    if(dia<10){
+      diaSalida ='0'+ dia; //agrega cero si el menor de 10
+    }
+    if(mes<10){
+      mesSalida ='0'+ mes
+    }
+
+    return anio + "-" + mesSalida + "-" + diaSalida;
   }
 
 }
