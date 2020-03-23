@@ -147,8 +147,8 @@ export class MetodoWebserviceComponent implements OnInit {
 
     this.authService.descargarXML(this.datosDescarga).subscribe( (data: any) => {
       console.log(data);
-      if(data.msg == true){
-        var blob = this.base64ToBlob(data);
+      if(data.resp == true){
+        var blob = this.base64ToBlob(data.msg);
         saveAs(blob, "file_xml.zip");
       }else{
         alert("El estatus aun esta en espera")
