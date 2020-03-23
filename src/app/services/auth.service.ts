@@ -66,10 +66,10 @@ export class AuthService {
     const headerOptions  = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin':'Content-Type',
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
       })
     };
-    return this.http.post(this.urlJava + "/recursos/co/verificarydescargar/", datos, headerOptions);
+    return this.http.post(this.urlJava + "recursos/co/verificarydescargar/", datos, headerOptions);
   }
 
   guardarDatosUsuario(datos: any){
