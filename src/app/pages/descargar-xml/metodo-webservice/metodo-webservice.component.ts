@@ -158,7 +158,7 @@ export class MetodoWebserviceComponent implements OnInit {
   }
 
   public base64ToBlob(b64Data, contentType='', sliceSize=512) {
-    b64Data = b64Data.replace(/\s/g, ''); //IE compatibility...
+    b64Data = b64Data.replace(/\s/g, ''); 
     let byteCharacters = atob(b64Data);
     let byteArrays = [];
     for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
@@ -190,17 +190,6 @@ export class MetodoWebserviceComponent implements OnInit {
             reader.onload = (e: any) => {
               arreglo = e.target.result.split(",");
               this.keyBase64 = arreglo[1];
-            };
-
-        reader.readAsDataURL(fileInput.target.files[0]);
-  }
-
-  private codificarArchivo(fileInput: any){
-    let arreglo = [];
-      const reader = new FileReader();
-            reader.onload = (e: any) => {
-              arreglo = e.target.result.split(",");
-              //console.log(arreglo[1]);
             };
 
         reader.readAsDataURL(fileInput.target.files[0]);
