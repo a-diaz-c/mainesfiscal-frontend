@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-metodo-webservice',
@@ -34,8 +36,9 @@ export class MetodoWebserviceComponent implements OnInit {
   listaSolicitudes;
   datosSolicitud: any;
   mensaje: string = "";
+  fileUrl;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
+  constructor(private authService: AuthService, private fb: FormBuilder, private sanitizer: DomSanitizer) {
     this.crearFormulario();
     this.cerBase64 = "";
     this.keyBase64 = ""; 
@@ -138,9 +141,32 @@ export class MetodoWebserviceComponent implements OnInit {
 
     console.log(this.datosDescarga);
 
-    this.authService.descargarXML(this.datosDescarga).subscribe( data => {
+    this.authService.descargarXML(this.datosDescarga).subscribe( (data: any) => {
       console.log(data);
+      if(data.msg == true){
+        var blob = this.base64ToBlob(data);
+        saveAs(blob, "file_xml.zip");
+      }else{
+        alert("El estatus aun esta en espera")
+      }
+      
     });
+  }
+
+  public base64ToBlob(b64Data, contentType='', sliceSize=512) {
+    b64Data = b64Data.replace(/\s/g, ''); //IE compatibility...
+    let byteCharacters = atob(b64Data);
+    let byteArrays = [];
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        let slice = byteCharacters.slice(offset, offset + sliceSize);
+        let byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+        let byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+    }
+    return new Blob(byteArrays, {type: contentType});
   }
 
   private asignar_cer(fileInput: any){
