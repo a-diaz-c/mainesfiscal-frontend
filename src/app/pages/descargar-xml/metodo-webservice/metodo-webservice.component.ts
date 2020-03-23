@@ -127,7 +127,7 @@ export class MetodoWebserviceComponent implements OnInit {
     this.datos.key_file = this.keyBase64;
     console.log(this.datos);
 
-    /*this.authService.solicitarDescarga(this.datos).subscribe(data => {
+    this.authService.solicitarDescarga(this.datos).subscribe(data => {
       this.datosSolicitud = data;
       this.respuestaSolicitud = this.datosSolicitud.resp;
       this.mensaje = this.datosSolicitud.msg;
@@ -135,7 +135,7 @@ export class MetodoWebserviceComponent implements OnInit {
       
     }, (err: HttpErrorResponse) => {
       console.log(`Error servidor remoto. ${err.status} # ${err.message}`)
-    });*/
+    });
     
   }
 
