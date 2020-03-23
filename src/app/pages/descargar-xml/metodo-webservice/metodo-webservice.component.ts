@@ -104,6 +104,10 @@ export class MetodoWebserviceComponent implements OnInit {
 
     console.log(this.form.controls);    
 
+    if(!this.form.valid){
+      return;
+    }
+
     if(this.form.controls.fecha_fin.value < this.form.controls.fecha_ini.value){
       console.log("Fecha incorrecta");
       this.fechaNoValida = true;
@@ -123,7 +127,7 @@ export class MetodoWebserviceComponent implements OnInit {
     this.authService.solicitarDescarga(this.datos).subscribe(data => {
       this.datosSolicitud = data;
       this.respuestaSolicitud = this.datosSolicitud.resp;
-      this.mensaje = this.datosSolicitud.mensaje;
+      this.mensaje = this.datosSolicitud.msg;
       console.log(this.datosSolicitud);
       
     }, (err: HttpErrorResponse) => {
