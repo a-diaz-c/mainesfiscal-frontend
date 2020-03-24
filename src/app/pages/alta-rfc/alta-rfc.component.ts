@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-alta-rfc',
@@ -9,13 +10,18 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 export class AltaRFCComponent implements OnInit {
 
 
+  usuarioid: string = '100';
+  res: any= {};
   nuevoRFCForm: FormGroup;
   files: any;
   filestring: string;
   cer: string = '';
   key: string = '';
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient
+    ) { }
 
   ngOnInit() {
 
@@ -24,15 +30,33 @@ export class AltaRFCComponent implements OnInit {
       razon: new FormControl('', [Validators.required]),
     })
 
+    this.traerRfcs();
+
   }
 
   agregarNuevoRFC(){
 
-    if(this.cer != '' && this.key != ''){
+    // if(this.cer != '' && this.key != ''){
       
-    }
+    // }
+    this.http.post("http://maines-rest.ddns.net:8080/mainesWeb/recursos/rfc/crear", {
+
+      clave_cliente:"100",		
+      rfc:this.nuevoRFCForm.value.rfc,		
+      razon_social: this.nuevoRFCForm.value.razon,		
+      cer_base64: this.cer,		
+      key_base64: this.key
+    }).subscribe(x => console.log(x));
+    
 
 
+
+  }
+
+
+  traerRfcs(){
+    this.http.get("http://maines-rest.ddns.net:8080/mainesWeb/recursos/rfc/lista/" + this.usuarioid)
+    .subscribe((data) => this.res = data);
   }
 
   getFiles(event) {
