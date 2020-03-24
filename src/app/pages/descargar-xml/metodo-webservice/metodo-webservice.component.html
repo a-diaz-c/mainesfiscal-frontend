@@ -8,9 +8,16 @@
                     <br>
                     <br>
                 </p>
-                <h6 class="text-danger" *ngIf="fechasNoValidas">Fecha No Valida</h6>
-                <h6 class="text-danger" *ngIf="!archivosIncompletos">Falta un archivo</h6>
-                <div class="alert alert-danger" role="alert" *ngIf="!respuestaSolicitud">
+                <div class="alert alert-danger" role="alert" *ngIf="fechasNoValidas">
+                    Fecha No Valida
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="archivosIncompletos">
+                    Falta un archivo
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="!getArchivoCorrecto">
+                    El archivo no esta en el formato correcto
+                </div>                 
+                <div class="alert alert-danger" role="alert" *ngIf="!getRespuestaSolicitus">
                     {{mensaje}}
                 </div>
                 <div class="table-responsive" style="font-size: 14px;">
@@ -136,6 +143,7 @@
                     </table>
                 </div>
                 <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #FFDA45;height: 50px;font-family: Bahnschrift;font-size: 18px;">Paso 2: Ejecutar la descarga de XMLs</p>
+                <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #FFDA45;height: 50px;font-family: Bahnschrift;font-size: 14px;">Nota: Debe agregar los datos de FIEL (RFC, CER file, Key file, Pass) en el formulario de arriba</p>
                 <div class="table-responsive">
                     <table class="table">
                         <thead style="background-color: #e3f2fd;font-size: 14px;">

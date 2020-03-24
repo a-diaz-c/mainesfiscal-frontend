@@ -29,14 +29,15 @@ export class MetodoWebserviceComponent implements OnInit {
 
   //validacion
   fechaNoValida: boolean = false;
-  archivosCompletos: boolean = true;
+  archivosCompletos: boolean = false;
+  archivosCorrecto: boolean = true;
   respuestaSolicitud: boolean = true;
 
   //respuestas
   listaRFCs;
   listaSolicitudes;
   datosSolicitud: any;
-  mensaje: string = "";
+  mensaje: string = "Falta un archivo";
   validar = new Validaciones();
   
   constructor(private authService: AuthService, private fb: FormBuilder, private sanitizer: DomSanitizer) {
@@ -71,6 +72,14 @@ export class MetodoWebserviceComponent implements OnInit {
     return this.form.get('hora_inicial').valid && this.form.get('hora_inicial').touched;
   }
 
+  get getArchivoCorrecto(){
+    return this.archivosCorrecto;
+  }
+
+  get getRespuestaSolicitus(){
+    return this.respuestaSolicitud;
+  }
+
   crearFormulario(){
     this.form = this.fb.group({
       rfc: ['', [Validators.required] ],
@@ -80,7 +89,7 @@ export class MetodoWebserviceComponent implements OnInit {
       hora_fin: ['23:59:59', Validators.required],
       origen: ['emisor'],
       tipo: ['XML'],
-      password: ['', [Validators.required, Validators.minLength(8)] ],
+      password: ['', [Validators.required, Validators.minLength(4)] ],
     });
   }
 
@@ -100,11 +109,10 @@ export class MetodoWebserviceComponent implements OnInit {
 
   solicitarDescarga(){
     this.fechaNoValida = false;
-    this.archivosCompletos = true;
-
-    console.log(this.form);    
+    this.archivosCompletos = false;  
 
     if(this.form.invalid){
+      console.log("no valido");
       Object.values(this.form.controls).forEach( control => {
         control.markAsTouched();
       })
@@ -118,7 +126,8 @@ export class MetodoWebserviceComponent implements OnInit {
     }
     
     if( this.cerBase64 === "" || this.keyBase64 === ""){
-      this.archivosCompletos = false;
+      console.log("Falta archivo");
+      this.archivosCompletos = true;
       return;
     }
 
@@ -154,7 +163,7 @@ export class MetodoWebserviceComponent implements OnInit {
         var blob = this.base64ToBlob(data.msg);
         saveAs(blob, "file_xml.zip");
       }else{
-        alert("El estatus aun esta en espera")
+        alert(data.msg);
       }
       
     });
@@ -178,31 +187,42 @@ export class MetodoWebserviceComponent implements OnInit {
 
   private asignar_cer(fileInput: any){
     let arreglo = [];
+    if(fileInput.target.files.length == 0)
+      return;
+
     if(this.validarArchivo(fileInput.target.files[0].name, "cer")){
       const reader = new FileReader();
             reader.onload = (e: any) => {
               arreglo = e.target.result.split(",");
               this.cerBase64 = arreglo[1];
+              this.archivosCorrecto = true;
             };
 
         reader.readAsDataURL(fileInput.target.files[0]);
     }else{
+      this.cerBase64 = "";
+      this.archivosCorrecto = false;
       console.log("No valido");
     }
   }
 
   private asignar_key(fileInput: any){
     let arreglo = [];
-    
+    if(fileInput.target.files.length == 0)
+      return;
+
     if(this.validarArchivo(fileInput.target.files[0].name, "key")){
       const reader = new FileReader();
             reader.onload = (e: any) => {
               arreglo = e.target.result.split(",");
               this.keyBase64 = arreglo[1];
+              this.archivosCorrecto = true;
             };
 
         reader.readAsDataURL(fileInput.target.files[0]);
     }else{
+      this.keyBase64 = "";
+      this.archivosCorrecto = false;
       console.log("No valido"); 
     }
 
@@ -215,7 +235,6 @@ export class MetodoWebserviceComponent implements OnInit {
     if( extesion[extesion.length - 1 ] === extensionValida){
       return true;
     }else{
-      this.cerBase64 = "";
       return false;
     }
   }
