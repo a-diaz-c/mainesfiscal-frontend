@@ -2,7 +2,11 @@
     <form style="width: 980px;max-width: 1000px;padding: 20px;height: none;font-family: Antic, sans-serif;" [formGroup]="form" (ngSubmit)="solicitarDescarga()">
         <div class="form-group text-center">
             <div class="container text-center" style="padding-left: 11px;width: 920px;margin: 0px;color: rgb(0,0,0);">
-                <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #C3E5E7;height: 50px;font-family: Bahnschrift;font-size: 18px;"><br>Descarga XML desde el SAT -&nbsp; Método Web Service<br><br>
+                <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #C3E5E7;height: 50px;font-family: Bahnschrift;font-size: 18px;">
+                    <br>
+                    Paso 1: Solicitar descarga de XMLs
+                    <br>
+                    <br>
                 </p>
                 <h6 class="text-danger" *ngIf="fechasNoValidas">Fecha No Valida</h6>
                 <h6 class="text-danger" *ngIf="!archivosIncompletos">Falta un archivo</h6>
@@ -131,7 +135,7 @@
                         </tbody>
                     </table>
                 </div>
-                <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #FFDA45;height: 50px;font-family: Bahnschrift;font-size: 18px;">Solicitudes de Descarga</p>
+                <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #FFDA45;height: 50px;font-family: Bahnschrift;font-size: 18px;">Paso 2: Ejecutar la descarga de XMLs</p>
                 <div class="table-responsive">
                     <table class="table">
                         <thead style="background-color: #e3f2fd;font-size: 14px;">
