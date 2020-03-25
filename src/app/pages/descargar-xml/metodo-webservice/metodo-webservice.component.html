@@ -1,3 +1,6 @@
+<div class="alert alert-danger text-center" role="alert" *ngIf="getErroConexion">
+    Error de conexion con el servidor
+</div>
 <div class="login-clean" style="background-color: #fff;padding-top: 40px;padding-bottom: 40px;">
     <form style="width: 980px;max-width: 1000px;padding: 20px;height: none;font-family: Antic, sans-serif;" [formGroup]="form" (ngSubmit)="solicitarDescarga()">
         <div class="form-group text-center">
@@ -17,7 +20,7 @@
                 <div class="alert alert-danger" role="alert" *ngIf="!getArchivoCorrecto">
                     El archivo no esta en el formato correcto
                 </div>                 
-                <div class="alert alert-danger" role="alert" *ngIf="!getRespuestaSolicitus">
+                <div class="alert alert-danger" role="alert" *ngIf="!getRespuestaSolicitud">
                     {{mensaje}}
                 </div>
                 <div class="table-responsive" style="font-size: 14px;">
@@ -144,6 +147,9 @@
                 </div>
                 <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #FFDA45;height: 50px;font-family: Bahnschrift;font-size: 18px;">Paso 2: Ejecutar la descarga de XMLs</p>
                 <p class="text-dark d-lg-flex justify-content-lg-center align-items-lg-center" style="background-color: #FFDA45;height: 50px;font-family: Bahnschrift;font-size: 14px;">Nota: Debe agregar los datos de FIEL (RFC, CER file, Key file, Pass) en el formulario de arriba</p>
+                <div class="alert alert-danger" role="alert" *ngIf="!getRespuestaDescarga">
+                    {{mensajeDescarga}}
+                </div>
                 <div class="table-responsive">
                     <table class="table">
                         <thead style="background-color: #e3f2fd;font-size: 14px;">

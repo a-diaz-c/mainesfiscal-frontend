@@ -32,19 +32,22 @@ export class MetodoWebserviceComponent implements OnInit {
   archivosCompletos: boolean = false;
   archivosCorrecto: boolean = true;
   respuestaSolicitud: boolean = true;
+  respuestaDescarga: boolean = true;
+  errorConexion: boolean = false;
+
 
   //respuestas
   listaRFCs;
   listaSolicitudes;
   datosSolicitud: any;
   mensaje: string = "Falta un archivo";
+  mensajeDescarga: string; 
   validar = new Validaciones();
   
   constructor(private authService: AuthService, private fb: FormBuilder, private sanitizer: DomSanitizer) {
     this.crearFormulario();
     this.cerBase64 = "";
     this.keyBase64 = ""; 
-
   }
 
   ngOnInit() {
@@ -76,8 +79,16 @@ export class MetodoWebserviceComponent implements OnInit {
     return this.archivosCorrecto;
   }
 
-  get getRespuestaSolicitus(){
+  get getRespuestaSolicitud(){
     return this.respuestaSolicitud;
+  }
+
+  get getRespuestaDescarga(){
+    return this.respuestaDescarga;
+  }
+
+  get getErroConexion(){
+    return this.errorConexion;
   }
 
   crearFormulario(){
@@ -94,22 +105,33 @@ export class MetodoWebserviceComponent implements OnInit {
   }
 
   listarRFCs(clave: string){
+    this.errorConexion = false;
+    
     this.authService.listarRFCs(clave).subscribe( (data: any) => {
       console.log(data);
       data.resp ? this.listaRFCs = data.msg : this.listaRFCs = [];
+    },(err: HttpErrorResponse) => {
+      console.log("Error del servidor");
+      this.errorConexion = true;
     });
   }
 
   listarSolicitudes(rfc: string){
+    this.errorConexion = false;
+    
     this.authService.getSolicitudes(rfc).subscribe( (data: any ) => {
       console.log(data);
       data.resp ? this.listaSolicitudes = data.msg : this.listaSolicitudes = [];
+    },(err: HttpErrorResponse) => {
+      console.log("Error del servidor");
+      this.errorConexion = true;
     });
   }
 
   solicitarDescarga(){
     this.fechaNoValida = false;
-    this.archivosCompletos = false;  
+    this.archivosCompletos = false; 
+    this.errorConexion = false; 
 
     if(this.form.invalid){
       console.log("no valido");
@@ -139,16 +161,25 @@ export class MetodoWebserviceComponent implements OnInit {
     this.authService.solicitarDescarga(this.datos).subscribe(data => {
       this.datosSolicitud = data;
       this.respuestaSolicitud = this.datosSolicitud.resp;
-      this.mensaje = this.datosSolicitud.msg;
-      console.log(this.datosSolicitud);
+      if(this.respuestaSolicitud){
+        console.log(this.datosSolicitud);
+        alert("Solicitud exitosa. Id Solocitud: " + this.datosSolicitud.msg);
+        this.listarSolicitudes('KSY010331243');
+      }else{
+        this.mensaje = this.datosSolicitud.msg;
+        console.log(this.datosSolicitud);
+      }
       
-    }, (err: HttpErrorResponse) => {
-      console.log(`Error servidor remoto. ${err.status} # ${err.message}`)
+      
+    },(err: HttpErrorResponse) => {
+      console.log("Error del servidor");
+      this.errorConexion = true;
     });
     
   }
 
   descargarXML(id_solicitud: string){
+    this.errorConexion = false;
     this.datosDescarga.id_solicitud = id_solicitud;
     this.datosDescarga.cer_file = this.cerBase64;
     this.datosDescarga.key_file = this.keyBase64;
@@ -159,13 +190,19 @@ export class MetodoWebserviceComponent implements OnInit {
 
     this.authService.descargarXML(this.datosDescarga).subscribe( (data: any) => {
       console.log(data);
+      
       if(data.resp == true){
+        this.respuestaDescarga = true;
         var blob = this.base64ToBlob(data.msg);
         saveAs(blob, "file_xml.zip");
       }else{
+        this.mensajeDescarga = data.msg;
+        this.respuestaDescarga = false;
         alert(data.msg);
       }
-      
+    },(err: HttpErrorResponse) => {
+      console.log("Error del servidor");
+      this.errorConexion = true;
     });
   }
 
