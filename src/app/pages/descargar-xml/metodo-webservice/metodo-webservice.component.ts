@@ -185,7 +185,7 @@ export class MetodoWebserviceComponent implements OnInit {
     return new Blob(byteArrays, {type: contentType});
   }
 
-  private asignar_cer(fileInput: any){
+  public asignar_cer(fileInput: any){
     let arreglo = [];
     if(fileInput.target.files.length == 0)
       return;
@@ -206,7 +206,7 @@ export class MetodoWebserviceComponent implements OnInit {
     }
   }
 
-  private asignar_key(fileInput: any){
+  public asignar_key(fileInput: any){
     let arreglo = [];
     if(fileInput.target.files.length == 0)
       return;
