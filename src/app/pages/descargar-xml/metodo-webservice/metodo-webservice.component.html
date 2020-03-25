@@ -144,9 +144,10 @@
                     <table class="table">
                         <thead style="background-color: #e3f2fd;font-size: 14px;">
                             <tr>
-                                <th>Id</th>
                                 <th>RFC Solcitante</th>
+                                <th>Clave Cliente</th>                                
                                 <th>Tipo Descarga</th>
+                                <th>Origen XML</th>
                                 <th>Fecha Solicitud</th>
                                 <th>Folio Solicitud</th>
                                 <th>Estatus Solicitud</th>
@@ -155,10 +156,11 @@
                         </thead>
                         <tbody>
                             <tr style="font-size: 14px;" *ngFor="let solicitud of listaSolicitudes"> 
-                                <td>{{solicitud.clave_clientePadre}}</td>
                                 <td>{{solicitud.rfc_solicitante}}</td>
+                                <td>{{solicitud.clave_clientePadre}}</td> 
                                 <td>{{solicitud.tipo_descarga}}</td>
-                                <td>{{solicitud.fecha}}</td>
+                                <td>{{solicitud.origen_xml}}</td>
+                                <td>{{solicitud.fecha}}</td>                                                               
                                 <td style="font-size: 14Ppx;">{{solicitud.id_solicitud}}</td>
                                 <td>Espera</td>
                                 <td>
