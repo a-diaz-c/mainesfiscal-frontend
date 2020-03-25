@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
         console.log('Error cliente o red:', err.error.message);
       } else {
         
-        this.titulo = "Error en el servidor";
+        this.titulo = "Error en el servidor: " +err.status + err.message;
         console.log(`Error servidor remoto. ${err.status} # ${err.message}`);
       }
     });

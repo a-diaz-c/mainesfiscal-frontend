@@ -10,9 +10,9 @@
                         </thead>
                         <tbody>
                             <tr class="border-white">
-                                <td class="text-center border-white"><label class="d-inline-block">Clave Cliente</label>
-                                    <input class="border rounded form-control d-inline-block" type="text" style="width: 300px;margin-right: 10px;margin-left: 10px;font-size: 14px;" name="clave_clientes"
-                                        placeholder="Clave Cliente"></td>
+                                <td class="text-center border-white">
+                                    <label class="d-inline-block">Clave Cliente: {{usuarioid}}</label>
+                                </td>
                                 <td class="text-right border-white">
                                 <button (click)="agregarNuevoRFC()" class="btn btn-info" type="button" style="margin-right: 40px;width: 130px;">Guardar</button></td>
                             </tr>
@@ -61,11 +61,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>KSY010331243<br></td>
-                                <td>Kingo Systems S.A. de C.V.</td>
-                                <td>ASDFGGHHKLLA</td>
-                                <td>ASDFGHJKLLFA</td>
+                            <tr *ngFor="let e of res.msg; let i = index">
+                                <td>{{e.rfc}}<br></td>
+                                <td>{{e.razon_social}}</td>
+                                <td>{{e.fiel_CerBase64}}</td>
+                                <td>{{e.fiel_KeyBase64}}</td>
                             </tr>
                         </tbody>
                     </table>
