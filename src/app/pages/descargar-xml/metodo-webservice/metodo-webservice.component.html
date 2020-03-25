@@ -1,4 +1,4 @@
-<div class="alert alert-danger text-center" role="alert" *ngIf="getErroConexion">
+<div class="alert alert-danger text-center" role="alert" *ngIf="getErroConexion" >
     Error de conexion con el servidor
 </div>
 <div class="login-clean" style="background-color: #fff;padding-top: 40px;padding-bottom: 40px;">
@@ -30,16 +30,6 @@
                         </thead>
                         <tbody>
                             <tr class="border-white">
-                                <!-- <td class="border-white">
-                                    <label class="d-inline-block">RFC  &nbsp; &nbsp; &nbsp; &nbsp;</label>
-                                    <input class="border rounded form-control d-inline-block is-invalid" 
-                                            type="text" style="width: 320px;font-size: 14px;margin-left: 40px;" 
-                                            formControlName="RFC" 
-                                            placeholder="RFC">
-                                    <div class="invalid-feedback" *ngIf="rfcNoValido">
-                                        Ingrese RFC
-                                    </div>
-                                </td>-->
                                 <td class="border-white">
                                     <label class="d-inline-block">Lista de RFCs &nbsp; &nbsp; &nbsp; &nbsp;</label>
                                     <select class="border rounded form-control d-inline-block" style="width: 285px;margin-left: 10px;font-size: 14px;"formControlName="rfc">
@@ -167,7 +157,7 @@
                             <tr style="font-size: 14px;" *ngFor="let solicitud of listaSolicitudes"> 
                                 <td>{{solicitud.clave_clientePadre}}</td>
                                 <td>{{solicitud.rfc_solicitante}}</td>
-                                <td>{{solicitud.tipo_solicitud}}</td>
+                                <td>{{solicitud.tipo_descarga}}</td>
                                 <td>{{solicitud.fecha}}</td>
                                 <td style="font-size: 14Ppx;">{{solicitud.id_solicitud}}</td>
                                 <td>Espera</td>
