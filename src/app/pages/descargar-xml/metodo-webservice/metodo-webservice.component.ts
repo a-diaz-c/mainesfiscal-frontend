@@ -178,13 +178,13 @@ export class MetodoWebserviceComponent implements OnInit {
     
   }
 
-  descargarXML(id_solicitud: string){
+  descargarXML(id_solicitud: string, rfc_solicitante: string){
     this.errorConexion = false;
     this.datosDescarga.id_solicitud = id_solicitud;
     this.datosDescarga.cer_file = this.cerBase64;
     this.datosDescarga.key_file = this.keyBase64;
     this.datosDescarga.password = this.form.get('password').value;
-    this.datosDescarga.rfc = this.form.get('rfc').value;
+    this.datosDescarga.rfc = rfc_solicitante;
 
     console.log(this.datosDescarga);
 

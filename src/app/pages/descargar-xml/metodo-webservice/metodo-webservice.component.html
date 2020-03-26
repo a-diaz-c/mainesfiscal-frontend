@@ -148,8 +148,8 @@
                                 <th>Clave Cliente</th>                                
                                 <th>Tipo Descarga</th>
                                 <th>Origen XML</th>
-                                <th>Fecha Solicitud</th>
-                                <th>Folio Solicitud</th>
+                                <th style="white-space:nowrap;">Fecha Solicitud</th>
+                                <th style="white-space:nowrap;">Folio Solicitud</th>
                                 <th>Estatus Solicitud</th>
                                 <th>Descargar CFIDs</th>
                             </tr>
@@ -164,7 +164,7 @@
                                 <td style="font-size: 14Ppx;">{{solicitud.id_solicitud}}</td>
                                 <td>Espera</td>
                                 <td>
-                                    <button class="btn btn-info" type="button" style="font-size: 14px;" (click)="descargarXML(solicitud.id_solicitud)"  download="file.txt">Descargar CFDIs</button>
+                                    <button class="btn btn-info" type="button" style="font-size: 14px;" (click)="descargarXML(solicitud.id_solicitud, solicitud.rfc_solicitante)"  download="file.txt">Descargar CFDIs</button>
                                 </td>
                             </tr>
                         </tbody>
